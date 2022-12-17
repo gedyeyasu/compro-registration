@@ -1,12 +1,11 @@
 package com.miu.registration.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
-public class Faculty {
+public class Faculty extends Person {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -19,12 +18,18 @@ public class Faculty {
 
     private String title;
 
+    @OneToMany
+    @JoinColumn(name = "fc_id")
+    private List<CourseOffering> courseOfferingList = new ArrayList<CourseOffering>();
 
-    public Faculty(String facultyId, String firstname, String email, String title) {
+
+    public Faculty(int id, String street, String city, String postalCode, String province, String facultyId, String firstname, String email, String title, List<CourseOffering> courseOfferingList) {
+        super(id, street, city, postalCode, province);
         this.facultyId = facultyId;
         this.firstname = firstname;
         this.email = email;
         this.title = title;
+        this.courseOfferingList = courseOfferingList;
     }
 
     public Faculty() {

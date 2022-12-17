@@ -2,7 +2,7 @@ package com.miu.registration.model;
 
 import javax.persistence.Entity;
 
+@Entity
 
-public class RegistrationRequest {
-
+public class Admin extends Person{
 }

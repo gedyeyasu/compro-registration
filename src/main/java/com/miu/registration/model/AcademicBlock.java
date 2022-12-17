@@ -1,10 +1,9 @@
 package com.miu.registration.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class AcademicBlock {
@@ -23,13 +22,18 @@ public class AcademicBlock {
 
     private LocalDate endDate ;
 
-    public AcademicBlock(int acdemicId, String code, String firstname, String lastname, LocalDate startDate, LocalDate endDate) {
+    @OneToMany
+    @JoinColumn(name = "Ac_id")
+    private List<CourseOffering> courseOfferingList = new ArrayList<CourseOffering>();
+
+    public AcademicBlock(int acdemicId, String code, String firstname, String lastname, LocalDate startDate, LocalDate endDate, List<CourseOffering> courseOfferingList) {
         this.acdemicId = acdemicId;
         this.code = code;
         this.firstname = firstname;
         this.lastname = lastname;
         this.startDate = startDate;
         this.endDate = endDate;
+        this.courseOfferingList = courseOfferingList;
     }
 
     public AcademicBlock() {

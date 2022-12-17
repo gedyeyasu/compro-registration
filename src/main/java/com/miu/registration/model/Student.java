@@ -1,12 +1,11 @@
 package com.miu.registration.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
-public class Student {
+public class Student extends Person {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -19,11 +18,15 @@ public class Student {
 
     private String email;
 
-    public Student(String studentId, String firstname, String lastname, String email) {
+    @OneToMany
+    private List<Address> addressList = new ArrayList<Address>();
+
+    public Student(String studentId, String firstname, String lastname, String email, List<Address> addressList) {
         this.studentId = studentId;
         this.firstname = firstname;
         this.lastname = lastname;
         this.email = email;
+        this.addressList = addressList;
     }
 
     public Student() {
@@ -60,5 +63,13 @@ public class Student {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public List<Address> getAddressList() {
+        return addressList;
+    }
+
+    public void setAddressList(List<Address> addressList) {
+        this.addressList = addressList;
     }
 }
