@@ -1,4 +1,9 @@
 package com.miu.registration.controller;
 
-public class Person {
+
+
+
+public class PersonController {
+
 }
+
