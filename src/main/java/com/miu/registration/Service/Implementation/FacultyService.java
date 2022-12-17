@@ -1,4 +1,4 @@
-package com.miu.registration.Service;
+package com.miu.registration.Service.Implementation;
 
 import com.miu.registration.Repository.FacultyRepository;
 import org.springframework.beans.factory.annotation.Autowired;

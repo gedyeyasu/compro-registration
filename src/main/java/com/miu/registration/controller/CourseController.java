@@ -1,6 +1,6 @@
 package com.miu.registration.controller;
 
-import com.miu.registration.Service.CourseOfferingService;
+import com.miu.registration.Service.Implementation.CourseOfferingService;
 import com.miu.registration.Service.Implementation.CourseService;
 import com.miu.registration.dto.CourseDTO;
 import org.springframework.beans.factory.annotation.Autowired;
