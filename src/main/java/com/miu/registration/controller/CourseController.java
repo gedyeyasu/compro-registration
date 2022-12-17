@@ -1,23 +1,26 @@
 package com.miu.registration.controller;
 
-import com.miu.registration.Service.CourseService;
-import com.miu.registration.model.Course;
+import com.miu.registration.Service.CourseOfferingService;
+import com.miu.registration.Service.Implementation.CourseService;
+import com.miu.registration.dto.CourseDTO;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
-
 @RestController
-@RequestMapping(value="/registration-events")
+@RequestMapping("/courses")
 public class CourseController {
 
     @Autowired
     private CourseService courseService;
 
-    @GetMapping(value ="/latest")
-    public List<Course> displayCourses(){
-        return courseService.getAllCourses();
+    @Autowired
+    private CourseOfferingService courseOfferingService;
+
+    @PostMapping()
+    public void addCourse(@RequestBody CourseDTO courseDTO){
+        courseService.addNewCourse(courseDTO);
     }
 }

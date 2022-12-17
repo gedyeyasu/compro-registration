@@ -1,20 +1,28 @@
 package com.miu.registration.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
-@Table
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class RegistrationEvent {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id", nullable = false)
-    private Long id;
 
-    public Long getId() {
-        return id;
-    }
+    private Long registrationeventid;
+    private LocalDate startDate;
+    private LocalDate endDate ;
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+    @OneToMany
+    @JoinColumn(name="re_id")
+    private List<RegistrationGroups> registrationGroupsList = new ArrayList<RegistrationGroups>();
 }

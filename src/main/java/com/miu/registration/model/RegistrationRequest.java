@@ -1,20 +1,22 @@
 package com.miu.registration.model;
 
-import javax.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 @Entity
-@Table
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class RegistrationRequest {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id", nullable = false)
-    private Long id;
 
-    public Long getId() {
-        return id;
-    }
+    private Long registrationrequestid;
 
-    public void setId(Long id) {
-        this.id = id;
-    }
 }

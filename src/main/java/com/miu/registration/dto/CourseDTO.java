@@ -1,0 +1,14 @@
+package com.miu.registration.dto;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+public class CourseDTO {
+    private String coursecode;
+    private String coursename;
+    private String description;
+}
