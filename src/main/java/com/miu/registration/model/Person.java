@@ -3,6 +3,7 @@ package com.miu.registration.model;
 import javax.persistence.*;
 
 @Entity
+@Table
 @Inheritance(strategy = InheritanceType.JOINED)
 public class Person {
     @Id
