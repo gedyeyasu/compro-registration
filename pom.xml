@@ -15,8 +15,6 @@
 	<description>MIU ComPro Course Registration System</description>
 	<properties>
 		<java.version>11</java.version>
-	</properties>
-	<properties>
 		<sonar.organization>gedyeyasu</sonar.organization>
 		<sonar.host.url>https://sonarcloud.io</sonar.host.url>
 	</properties>
