@@ -9,23 +9,23 @@ import javax.validation.constraints.Email;
 
 @Entity
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 public class Address {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-
-    private Long id;
-
-    private Long addressId;
-
+    @GeneratedValue
+    private Long Id;
     private String street;
-
     private String city;
+    private long postalCode;
+    private String state;
+    private String country;
 
-    private String postalCode;
-
-    private String province;
-
-
+    public Address(String street, String city, long postalCode, String state, String country) {
+        this.street = street;
+        this.city = city;
+        this.postalCode = postalCode;
+        this.state = state;
+        this.country = country;
+    }
 }

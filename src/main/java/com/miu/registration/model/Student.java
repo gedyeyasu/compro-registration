@@ -13,18 +13,25 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Student {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-
-    private Long studentId;
-
-    private String email;
+public class Student extends Person {
 
 
-    @OneToMany
-    @JoinColumn
-    private List<Address> addressList = new ArrayList<Address>();
+    //private Long studentId;
+
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    private Address mailAddress;
+
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    private Address homeAddress;
+
+
+    public Student(String firstName, String lastName, String email, String userName,
+                   String password,  Address mailAddress, Address homeAddress) {
+        super(firstName, lastName, email, userName, password);
+
+        this.mailAddress = mailAddress;
+        this.homeAddress = homeAddress;
+    }
+
 
 }

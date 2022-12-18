@@ -6,20 +6,27 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
-//@Entity
-//@Data
-//@AllArgsConstructor
-//@NoArgsConstructor
-//@Inheritance(strategy = InheritanceType.JOINED)
+
+@Data
+@Entity
+@NoArgsConstructor
+@Inheritance(strategy = InheritanceType.JOINED)
 public class Person {
+
     @Id
-    @GeneratedValue
 
     private Long id;
-    private String firstname;
-    private String lastname;
+    private String firstName;
+    private String lastName;
     private String email;
+    private String username;
+    private String password;
 
-
-
+    public Person(String firstName, String lastName, String email, String username, String password) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.username = username;
+        this.password = password;
+    }
 }

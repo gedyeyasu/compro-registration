@@ -11,14 +11,14 @@ import javax.persistence.Id;
 
 @Entity
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
-public class Faculty {
+@AllArgsConstructor
+public class Faculty extends Person{
+    //private Long facultyId;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
 
-    private Long id;
-    private String email;
     private String title;
+
+
 }
+

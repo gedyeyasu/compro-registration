@@ -3,6 +3,7 @@ package com.miu.registration.controller;
 import com.miu.registration.Service.Implementation.CourseOfferingService;
 import com.miu.registration.Service.Implementation.CourseService;
 import com.miu.registration.dto.CourseDTO;
+import com.miu.registration.dto.CourseOfferingDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -22,5 +23,10 @@ public class CourseController {
     @PostMapping()
     public void addCourse(@RequestBody CourseDTO courseDTO){
         courseService.addNewCourse(courseDTO);
+    }
+    @PostMapping("/offerings")
+
+    public void addNewCourseOffering(@RequestBody CourseOfferingDTO courseOfferingDTO){
+        courseOfferingService.addNewCourseOffering(courseOfferingDTO);
     }
 }

@@ -1,24 +1,22 @@
-package com.miu.registration.model;
+package com.miu.registration.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
-import javax.persistence.*;
+
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import java.time.LocalDate;
 import java.util.Date;
 
-@Entity
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class AcademicBlock {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-
-    private Long academicid;
+public class AcademicBlockDTO {
     private String academiccode;
     private String fullname;
-
     @Temporal(TemporalType.DATE)
     @DateTimeFormat(style = "yyyy-MM-dd")
     private Date startDate;
