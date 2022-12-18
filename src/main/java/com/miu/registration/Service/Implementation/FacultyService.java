@@ -28,4 +28,18 @@ public class FacultyService implements FacultyServiceInterface {
         facultyRepository.save(faculty);
 
     }
+
+    @Override
+    public Faculty getFacultyId() {
+        return null;
+    }
+
+
+    @Override
+    public Faculty getFacultyId(Faculty faculty) {
+        return facultyRepository.findById(faculty);
+    }
+
+
+
 }

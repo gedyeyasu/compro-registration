@@ -10,4 +10,9 @@ public interface FacultyServiceInterface {
     public List<Faculty> getAllFaculties();
     public void addNewFaculty(FacultyDTO facultyDTO);
 
+    Faculty getFacultyId();
+
+    Faculty getFacultyId(Faculty faculty);
+
+
 }

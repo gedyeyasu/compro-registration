@@ -14,5 +14,5 @@ public interface RegistrationEventInterface {
     public void viewRegisterationEvent(RegistrationEventDTO registrationEventDTO);
 
 
-
+    void deleteRegistrationList(Long registrationeventId);
 }

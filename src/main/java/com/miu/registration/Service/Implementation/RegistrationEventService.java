@@ -30,6 +30,12 @@ public class RegistrationEventService implements RegistrationEventInterface {
 
     }
 
+    @Override
+    public void deleteRegistrationList(Long registrationeventId) {
+        registrationEventRepository.deleteAll();
+
+    }
+
 
 
 

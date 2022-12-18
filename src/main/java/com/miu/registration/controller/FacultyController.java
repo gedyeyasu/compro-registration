@@ -2,11 +2,12 @@ package com.miu.registration.controller;
 
 import com.miu.registration.Service.Implementation.FacultyService;
 import com.miu.registration.dto.FacultyDTO;
+import com.miu.registration.model.Faculty;
+import com.miu.registration.model.Student;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping(value="/faculties")
@@ -19,6 +20,16 @@ public class FacultyController {
     public void addNewFaculty(@RequestBody FacultyDTO facultyDTO){
         facultyService.addNewFaculty(facultyDTO);
 
+    }
+    @GetMapping(value ="/{id}")
+    public Faculty getFacultybyId(){
+        return facultyService.getFacultyId();
+
+    }
+    @GetMapping()
+    public List<Faculty> getAllFaculties(){
+
+        return facultyService.getAllFaculties();
     }
 
 

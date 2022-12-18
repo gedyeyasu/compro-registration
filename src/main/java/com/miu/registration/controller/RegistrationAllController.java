@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-//@RequestMapping(value = {"/registrationGroups"})
+@RequestMapping(value = "/registrationGroups")
 
 public class RegistrationAllController {
 
@@ -35,6 +35,12 @@ public class RegistrationAllController {
     public List<RegistrationEvent> fetchRegistrationList()
     {
         return registrationEventService.getFetchRegistrationList();
+    }
+    @DeleteMapping ("/registrationEvents{id}")
+    public String  deleteRegistrationList(@PathVariable("id")Long registrationeventId){
+        registrationEventService.deleteRegistrationList(registrationeventId);
+        return " Deleted Event Suceesfully";
+
     }
 
 
