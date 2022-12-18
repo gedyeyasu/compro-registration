@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
 @Entity
@@ -13,10 +14,10 @@ import javax.persistence.ManyToOne;
 @NoArgsConstructor
 public class Student extends Person{
     private Long studentId;
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne(cascade = {CascadeType.ALL})
     private Address mailAddress;
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne(cascade = {CascadeType.ALL})
     private Address homeAddress;
 
     public Student(String firstName, String lastName, String email,

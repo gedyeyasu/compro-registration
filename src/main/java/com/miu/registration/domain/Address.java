@@ -1,5 +1,6 @@
 package com.miu.registration.domain;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -10,6 +11,7 @@ import javax.persistence.Id;
 @Entity
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 public class Address {
     @Id
     @GeneratedValue
@@ -26,5 +28,9 @@ public class Address {
         this.postalCode = postalCode;
         this.state = state;
         this.country = country;
+    }
+
+    public void setId(){
+
     }
 }

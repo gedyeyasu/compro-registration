@@ -4,6 +4,8 @@ import com.miu.registration.domain.Address;
 import com.miu.registration.domain.Student;
 import com.miu.registration.repositories.AddressRepository;
 import com.miu.registration.repositories.StudentRepository;
+import com.miu.registration.service.AddressDTO;
+import com.miu.registration.service.StudentDTO;
 import com.miu.registration.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -31,14 +33,20 @@ public class RegistrationApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		Student tewodroes = new Student("Tewodroes", "Hailu",
-				"tewodroes.hailu@miu.edu","teddy-meselu", "Pass@123", 615167L);
-		Address mAddress = new Address("1000 N4thSt.", "Fairfield", 52557, "Iowa", "USA");
-		Address hAddress = new Address("2000SW St.", "Fairfield", 53567, "Iowa", "USA");
+		StudentDTO tewodroes = new StudentDTO("Tewodroes", "Hailu",
+				"tewodroes.hailu@miu.edu", 615167L);
+		StudentDTO gedeon = new StudentDTO("Gedeon", "Tona",
+				"gedeon.tona@miu.edu", 776655L);
+		AddressDTO mAddress = new AddressDTO("1000 N4thSt.", "Fairfield", 52557, "Iowa", "USA");
+		AddressDTO hAddress = new AddressDTO("2000SW St.", "Fairfield", 53567, "Iowa", "USA");
 		tewodroes.setMailAddress(mAddress);
 		tewodroes.setHomeAddress(hAddress);
 
+		gedeon.setHomeAddress(hAddress);
+		gedeon.setMailAddress(mAddress);
+
 		studentService.createStudent(tewodroes);
+		studentService.createStudent(gedeon);
 
 	}
 }

@@ -12,7 +12,7 @@ import javax.persistence.*;
 @Data
 @NoArgsConstructor
 @Inheritance(strategy = InheritanceType.JOINED)
-public class Person {
+public abstract class Person {
     @Id
     @GeneratedValue
     private Long id;
