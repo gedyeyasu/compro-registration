@@ -16,10 +16,6 @@ public class CourseService  implements CourseServiceInterface {
     @Autowired
     private CourseRepository courseRepository;
 
-    @Override
-    public List<Course> getAllCourses() {
-        return null;
-    }
 
     @Override
     public void addNewCourse(CourseDTO courseDTO) {
@@ -27,4 +23,21 @@ public class CourseService  implements CourseServiceInterface {
         BeanUtils.copyProperties(courseDTO,course);
          courseRepository.save(course);
     }
+
+    @Override
+    public void deleteCourseById(Long departmentId) {
+
+    }
+
+    @Override
+    public void getUpdateCourse(Long id) {
+        courseRepository.findAll();
+    }
+
+    @Override
+    public List<Course> fetchCourseList() {
+        return courseRepository.findAll();
+    }
+
+
 }

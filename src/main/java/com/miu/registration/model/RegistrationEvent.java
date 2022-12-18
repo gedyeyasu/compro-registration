@@ -30,5 +30,5 @@ public class RegistrationEvent {
     private Date endDate ;
 
     @OneToMany(cascade = CascadeType.ALL)
-    private Collection<RegistrationGroups> registrationGroupsList ;
+    private List<RegistrationGroups> registrationGroupsList ;
 }

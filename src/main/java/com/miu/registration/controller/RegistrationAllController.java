@@ -10,6 +10,7 @@ import com.miu.registration.model.RegistrationEvent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -31,18 +32,26 @@ public class RegistrationAllController {
         registrationEventService.viewRegisterationEvent(registrationEventDTO);
 
     }
-    @GetMapping("/registartionEvents")
+    @GetMapping("/registartionEvents/getevent")
     public List<RegistrationEvent> fetchRegistrationList()
     {
         return registrationEventService.getFetchRegistrationList();
     }
-    @DeleteMapping ("/registrationEvents{id}")
+    @GetMapping("/registration-events/latest")
+    public RegistrationEvent getAlllatesetOffering(){
+        return registrationEventService.getlatesetevent();
+    }
+    @PutMapping("/registartionEvents/{startevent}/{endevent}")
+     public List<RegistrationEvent> updateEvent(@PathVariable Long updateid, @PathVariable Date startDate, @PathVariable Date endDate){
+        return registrationEventService.updateevents(updateid,startDate,endDate);
+
+    }
+    @DeleteMapping ("/registrationEvents/{id}")
     public String  deleteRegistrationList(@PathVariable("id")Long registrationeventId){
         registrationEventService.deleteRegistrationList(registrationeventId);
         return " Deleted Event Suceesfully";
 
     }
-
 
     @PostMapping("/acdemicBlock")
     public void viewAcademicBlock(@RequestBody AcademicBlockDTO academicBlockDTO){

@@ -4,14 +4,14 @@ import com.miu.registration.Service.Implementation.CourseOfferingService;
 import com.miu.registration.Service.Implementation.CourseService;
 import com.miu.registration.dto.CourseDTO;
 import com.miu.registration.dto.CourseOfferingDTO;
+import com.miu.registration.model.Course;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
-@RequestMapping("/courses")
+//@RequestMapping("/courses")
 public class CourseController {
 
     @Autowired
@@ -20,9 +20,34 @@ public class CourseController {
     @Autowired
     private CourseOfferingService courseOfferingService;
 
-    @PostMapping()
+    // creates new course
+    @PostMapping("/courses")
     public void addCourse(@RequestBody CourseDTO courseDTO){
         courseService.addNewCourse(courseDTO);
+    }
+    @GetMapping("/courses")
+
+    public List<Course> fetchCourseList()
+    {
+        return courseService.fetchCourseList();
+    }
+
+    // delete course
+
+    @DeleteMapping("/courses/{id}")
+
+    public String deleteCourseById(@PathVariable("id") Long departmentId)
+    {
+        courseService.deleteCourseById(departmentId);
+        return "Deleted Successfully";
+    }
+    // edit a course
+    @PutMapping(value="/{id}")
+    public  void getUpdateCourse(@PathVariable Long id) {
+
+        courseService.getUpdateCourse(id);
+
+
     }
     @PostMapping("/offerings")
 

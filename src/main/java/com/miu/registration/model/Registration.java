@@ -11,15 +11,14 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class RegistrationRequest {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
 
+public class Registration {
+    @Id
+    @GeneratedValue
     private Long id;
-    @OneToOne(cascade = CascadeType.PERSIST)
-    private Student Student;
+    @OneToOne
+    private Student student;
     @OneToMany(cascade = CascadeType.PERSIST)
     private List<CourseOffering> courseOfferingList;
-
 
 }

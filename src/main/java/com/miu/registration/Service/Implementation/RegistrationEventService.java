@@ -6,8 +6,10 @@ import com.miu.registration.dto.RegistrationEventDTO;
 import com.miu.registration.model.RegistrationEvent;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -36,7 +38,10 @@ public class RegistrationEventService implements RegistrationEventInterface {
 
     }
 
-
+    @Override
+    public  RegistrationEvent getlatesetevent() {
+        return (RegistrationEvent) registrationEventRepository.findAll(Sort.by(Sort.Direction.DESC,""));
+    }
 
 
     @Override
@@ -45,5 +50,7 @@ public class RegistrationEventService implements RegistrationEventInterface {
     }
 
 
-
+    public List<RegistrationEvent> updateevents(Long updateid, Date startDate, Date endDate) {
+        return registrationEventRepository.findAll();
+    }
 }

@@ -15,4 +15,6 @@ public interface RegistrationEventInterface {
 
 
     void deleteRegistrationList(Long registrationeventId);
+
+    public RegistrationEvent getlatesetevent();
 }

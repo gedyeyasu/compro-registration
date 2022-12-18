@@ -7,6 +7,13 @@ import java.util.List;
 
 public interface CourseServiceInterface {
 
-    public List<Course> getAllCourses();
+
     public void addNewCourse(CourseDTO courseDTO);
+
+    void deleteCourseById(Long departmentId);
+
+    void getUpdateCourse(Long id);
+    List<Course> fetchCourseList();
+
+
 }
