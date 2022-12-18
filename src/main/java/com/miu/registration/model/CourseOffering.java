@@ -28,7 +28,7 @@ public class CourseOffering {
     private AcademicBlock academicBlock;
 
     @ManyToOne
-    @JoinTable(name="course_faculty")
+    @JoinColumn(name = "faculty_id")
     private Faculty faculty;
 
 
