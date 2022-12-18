@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping(value="/students")
+
 public class StudentController {
     @Autowired
     private StudentService studentService;
@@ -21,21 +21,19 @@ public class StudentController {
         studentService.addNewStudnt(studentDTO);
     }
 
-    @GetMapping()
+    @GetMapping("/students")
     public List<Student> getAllStudent(){
 
         return studentService.getAllStudents();
     }
-    @GetMapping (value = {"/id"})
+    @GetMapping ("/students/id")
     public Student getStudent(){
         return studentService.getStudentById();
     }
-    @PutMapping(value="/{id}")
-    public ResponseEntity<Student> getUpdateStudent(@RequestBody Student student ,
-                                                   @PathVariable Long id) {
+    @PutMapping("/students/id")
+    public ResponseEntity<Student> getUpdateStudent(@RequestBody Student student , @PathVariable Long id) {
 
         return studentService.getUpdateStudent(id);
-
 
     }
 

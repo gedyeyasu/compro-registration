@@ -42,7 +42,7 @@ public class CourseController {
         return "Deleted Successfully";
     }
     // edit a course
-    @PutMapping(value="/{id}")
+    @PutMapping(value="/courses/{id}")
     public  void getUpdateCourse(@PathVariable Long id) {
 
         courseService.getUpdateCourse(id);

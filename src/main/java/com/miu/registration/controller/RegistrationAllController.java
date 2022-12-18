@@ -4,8 +4,10 @@ import com.miu.registration.Service.Implementation.AcademicBlockSerivce;
 import com.miu.registration.Service.Implementation.RegistrationEventService;
 import com.miu.registration.Service.Implementation.RegistrationGroupsService;
 
+import com.miu.registration.Service.Implementation.RegistrationService;
 import com.miu.registration.dto.AcademicBlockDTO;
 import com.miu.registration.dto.RegistrationEventDTO;
+import com.miu.registration.model.Registration;
 import com.miu.registration.model.RegistrationEvent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -14,7 +16,7 @@ import java.util.Date;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "/registrationGroups")
+//@RequestMapping(value = "/registrationGroups")
 
 public class RegistrationAllController {
 
@@ -23,6 +25,8 @@ public class RegistrationAllController {
 
     @Autowired
     private RegistrationGroupsService registrationGroupsService;
+    @Autowired
+    private RegistrationService registrationService;
 
     @Autowired
     private AcademicBlockSerivce academicBlockSerivce;
@@ -52,6 +56,17 @@ public class RegistrationAllController {
         return " Deleted Event Suceesfully";
 
     }
+    // FOR Registration CRUD  ---- use case - 6
+
+    @GetMapping("/registrations")
+    public List<Registration> RegistrationList()
+    {
+        return registrationService.RegistrationList();
+    }
+
+
+
+
 
     @PostMapping("/acdemicBlock")
     public void viewAcademicBlock(@RequestBody AcademicBlockDTO academicBlockDTO){
