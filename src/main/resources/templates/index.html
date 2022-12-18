@@ -2,14 +2,13 @@
 <head>
     <meta name="viewport" content="width = device-width, initial-scale = 1, shrink-to-fit = no">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
-    <link rel="shortcut icon" href="/images/images.png">
-    <title>Course Registration System -</title>
+    <title>BlueCollar App</title>
+    <script defer src="/js/app.js"></script>
 </head>
 
 <body>
 <nav class = "navbar navbar-expand-sm navbar-dark bg-secondary">
-    <a class = "navbar-brand" href = "/">Maharishi International University
-    </a>
+    <a class = "navbar-brand" href = "/">BlueCollar App</a>
     <button class = "navbar-toggler" type = "button" data-toggle = "collapse"
             data-target = "#navbarSupportedContent"
             aria-controls = "navbarSupportedContent" aria-expanded = "false"
@@ -17,69 +16,65 @@
         <span class = "navbar-toggler-icon"></span>
     </button>
 </nav>
-
 <div class="container">
-    <div class="container-fluid top-s">
-        <div class="container-fluid main">
-            <div class=" main overlay2">
-                <div class="container login">
-                    <center>  <img th:src="@{/images/images.png}" alt="" width="300px"> </center>
-                    <center><h6>Course Registration System</h6> </center>
-                    <h3 class="login-heading">Login</h3>
-                    <p>If you cannot remember your username/password
-                        <a href=""> click here</a> to reset your password</p>
-                    <div class="form">
-                        <form action="bluecollarlist" th:action="@{/bluecollarlist}">
-                            <div class="form-group">
-                                <label for="email">Email</label>
-                                <input type="text" class="form-control email" name="" value="" id="email">
-                            </div>
-                            <div class="form-group">
-                                <label for="password">Password</label>
-                                <input type="password" class="form-control password" name="" value="" id="password">
-                            </div>
-                            <button type="submit" class=" btn btn-black btn-block" name="" id="payment"><a href="bluecollarlist">Login</a></button>
-                        </form>
 
-                        <br>
+    <div class="container-fluid main">
+        <div class=" main overlay2">
+            <div class="container login">
 
+                <center> <img th:src="@{/images/logo.png}" alt="" width="300px"></center>
+                <center><h6>If the workers of the world want to win, all they have to do is recognize their own solidarity</h6></center>
+                <h3 class="login-heading">Sign Up</h3>
+                <p>Welcome back! Please fill the form to get Services</p>
+                <div class="form">
+                    <form  method="post" th:action="@{/signup}" th:object="${user}">
+                        <!--              <form action ="/login" method="post" th:object="${user}">-->
+                        <div>
+                            <span> Fields marked with aterisks(*) are required.</span>
+                        </div>
+                        <div class="form-group">
+                            <label for="firstname">Firstname*</label>
+                            <div>
+                                <span th:if="${#fields.hasErrors('firstname')}" th:errors="*{firstname}" class="errorMsg"> </span>
+                            </div>
+                            <input type="text" class="form-control "  id="firstname" th:field="*{firstname}" required >
+                        </div>
+                        <div class="form-group">
+                            <label for="lastname">Lastname*</label>
+                            <input type="text" class="form-control" id="lastname" th:field="*{lastname}">
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email*</label>
+                            <input type="text" class="form-control "  id="email" th:field="*{email}">
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Password*</label>
+                            <input type="password" class="form-control "  id="password" th:field="*{password}">
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Confirm Password</label>
+                            <input type="password" class="form-control password"  id="confirmpassword" th:field="*{confirmpassword}">
+                        </div>
+                        <!--              <div>-->
+                        <!--                  <input type="submit" value="Register User">-->
+                        <!--              </div>-->
+                        <button type="submit" class=" btn btn-black btn-block"  id="login">Sign Up</button>
+                    </form>
+                    <br>
+                    <div class="signo">
+                        <a href="login"><small id="info">Have an Account?</small></a>
                     </div>
                 </div>
-                  <hr>
-                 <hr>
-                <footer>
-                    <p> Copyright ©2022 Maharishi International University. All rights reserved.
-                        Creators: Group-1 </p>
-                </footer>
-
+            </div>
+            <div class="icons">
+                <img src="/images/facebook.png" alt="">
+                <img src="/images/g_plus.png" alt="">
+                <img src="/images/skype.png" alt="">
+                <img src="/images/twitter.png" alt="">
+                <img src="/images/you_tube.png" alt="">
             </div>
         </div>
     </div>
 </div>
-
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

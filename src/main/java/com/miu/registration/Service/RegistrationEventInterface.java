@@ -10,5 +10,9 @@ public interface RegistrationEventInterface {
 
     public List<RegistrationEvent> getAllRegistrationEvent();
 
+    public List< RegistrationEvent> getFetchRegistrationList();
     public void viewRegisterationEvent(RegistrationEventDTO registrationEventDTO);
+
+
+
 }

@@ -29,4 +29,15 @@ public class RegistrationEventService implements RegistrationEventInterface {
         registrationEventRepository.save(registrationEvent);
 
     }
+
+
+
+
+    @Override
+    public List<RegistrationEvent> getFetchRegistrationList() {
+        return registrationEventRepository.findAll();
+    }
+
+
+
 }

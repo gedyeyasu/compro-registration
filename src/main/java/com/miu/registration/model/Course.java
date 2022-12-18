@@ -21,9 +21,9 @@ public class Course {
     private String coursecode;
     private String coursename;
     private String description;
-    @OneToMany(mappedBy = "course")
+    @OneToMany
     @JoinColumn(name="course_id")
-    private List<CourseOffering> courseOfferingList = new ArrayList<CourseOffering>();
+    private List<CourseOffering> courseOfferingList = new ArrayList<>();
 
 
 

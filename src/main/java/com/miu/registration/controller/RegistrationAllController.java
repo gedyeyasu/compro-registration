@@ -6,14 +6,14 @@ import com.miu.registration.Service.Implementation.RegistrationGroupsService;
 
 import com.miu.registration.dto.AcademicBlockDTO;
 import com.miu.registration.dto.RegistrationEventDTO;
+import com.miu.registration.model.RegistrationEvent;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
-@RequestMapping(value = {"/registrationGroups"})
+//@RequestMapping(value = {"/registrationGroups"})
 
 public class RegistrationAllController {
 
@@ -25,12 +25,19 @@ public class RegistrationAllController {
 
     @Autowired
     private AcademicBlockSerivce academicBlockSerivce;
-
-    @PostMapping()
+// FOT RegistrationEvent CRUD
+    @PostMapping("/registartionEvents")
     public void viewRegistrationEvent(@RequestBody RegistrationEventDTO registrationEventDTO){
         registrationEventService.viewRegisterationEvent(registrationEventDTO);
 
     }
+    @GetMapping("/registartionEvents")
+    public List<RegistrationEvent> fetchRegistrationList()
+    {
+        return registrationEventService.getFetchRegistrationList();
+    }
+
+
     @PostMapping("/acdemicBlock")
     public void viewAcademicBlock(@RequestBody AcademicBlockDTO academicBlockDTO){
         academicBlockSerivce.viewAcademicBlock(academicBlockDTO);
