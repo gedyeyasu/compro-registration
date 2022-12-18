@@ -148,4 +148,4 @@ jobs:
           environment_name: comproregistration-env
           version_label: ${{github.SHA}}
           region: us-east-2
-          deployment_package: data-0.0.1-SNAPSHOT.jar
+          deployment_package: registration-0.0.1-SNAPSHOT.jar
