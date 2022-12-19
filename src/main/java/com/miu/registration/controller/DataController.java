@@ -11,4 +11,9 @@ public class DataController {
         return "Version 1.0.0";
     }
 
+    @GetMapping("/")
+    public String health(){
+        return "OK";
+    }
+
 }
