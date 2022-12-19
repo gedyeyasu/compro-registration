@@ -1,8 +1,7 @@
 package com.miu.registration.controller;
-
+import com.miu.registration.exception.NotFoundException;
+import com.miu.registration.service.ICourseOfferingService;
 import com.miu.registration.service.DTO.CourseOfferingDTO;
-import com.miu.registration.currentTypeError.ErrorOccured;
-import com.miu.registration.service.CourseOffServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 public class CourseOfferingController {
 
     @Autowired
-    CourseOffServiceInterface courseOffService;
+    ICourseOfferingService courseOffService;
 
 @GetMapping
     public ResponseEntity<?> getAll(){
@@ -24,7 +23,7 @@ public class CourseOfferingController {
     if(courseOfferings.size()!=0){
         return new ResponseEntity<>(courseOfferings, HttpStatus.OK);
     }else{
-        return new ResponseEntity<>(new ErrorOccured(),HttpStatus.NOT_FOUND);
+        return new ResponseEntity<NotFoundException>(new NotFoundException("No Course Offering is found."),HttpStatus.NOT_FOUND);
     }
 
 }
@@ -37,7 +36,8 @@ public class CourseOfferingController {
         if(courseOffering!=null){
             return new ResponseEntity<>(courseOffering, HttpStatus.OK);
         }else{
-            return new ResponseEntity<>(new ErrorOccured(),HttpStatus.NOT_FOUND);
+            return new ResponseEntity<NotFoundException>(new NotFoundException("Course Offering with " +
+                    "Id= "+id+" not found."),HttpStatus.NOT_FOUND);
         }
 
     }
@@ -56,7 +56,8 @@ public class CourseOfferingController {
         if(courseOffering!=null){
             return new ResponseEntity<>(courseOffering, HttpStatus.OK);
         }else{
-            return new ResponseEntity<>(new ErrorOccured("not saved"),HttpStatus.NOT_FOUND);
+            return new ResponseEntity<NotFoundException>(new NotFoundException("Not Saved."),
+                    HttpStatus.NOT_FOUND);
         }
 
     }

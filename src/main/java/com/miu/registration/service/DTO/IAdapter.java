@@ -1,4 +1,4 @@
-package com.miu.registration.service;
+package com.miu.registration.service.DTO;
 
 import com.miu.registration.domain.Student;
 

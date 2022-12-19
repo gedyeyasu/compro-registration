@@ -7,7 +7,7 @@ import com.miu.registration.service.DTO.RegistrationRequestDTO;
 
 import java.util.Collection;
 
-public interface RegistrationRequestService {
+public interface IRegistrationRequestService {
     Collection<RegistrationRequestDTO> getAllSubmitRequests();
     RegistrationRequestDTO getSubmittedRequest(long id);
     void createSubmittedRequest(RegistrationRequestDTO requestDTO);

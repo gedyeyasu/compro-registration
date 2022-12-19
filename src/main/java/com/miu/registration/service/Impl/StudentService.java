@@ -1,12 +1,13 @@
-package com.miu.registration.service;
+package com.miu.registration.service.Impl;
 
 import com.miu.registration.domain.Address;
 import com.miu.registration.domain.Student;
 import com.miu.registration.repositories.AddressRepository;
 import com.miu.registration.repositories.StudentRepository;
-import com.miu.registration.service.Adaptors.AddressAdapter;
-import com.miu.registration.service.Adaptors.StudentAdapter;
+import com.miu.registration.service.Adapters.AddressAdapter;
+import com.miu.registration.service.Adapters.StudentAdapter;
 import com.miu.registration.service.DTO.StudentDTO;
+import com.miu.registration.service.IStudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,7 +16,7 @@ import java.util.Collection;
 
 @Service
 @Transactional
-public class StudentService implements IStudentService{
+public class StudentService implements IStudentService {
     @Autowired
     StudentAdapter studentAdapter;
 

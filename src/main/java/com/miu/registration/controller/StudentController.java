@@ -2,19 +2,19 @@ package com.miu.registration.controller;
 
 import com.miu.registration.exception.NotFoundException;
 import com.miu.registration.repositories.StudentRepository;
-import com.miu.registration.service.StudentAdapter;
-import com.miu.registration.service.StudentDTO;
-import com.miu.registration.service.StudentService;
+import com.miu.registration.service.Adapters.StudentAdapter;
+import com.miu.registration.service.DTO.StudentDTO;
+import com.miu.registration.service.Impl.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
-import java.util.List;
 
 @RestController
 @CrossOrigin
+@RequestMapping("/students")
 public class StudentController {
     @Autowired
     StudentService studentService;
@@ -24,7 +24,7 @@ public class StudentController {
     @Autowired
     StudentAdapter studentAdapter;
 
-    @GetMapping("/students")
+    @GetMapping
     public ResponseEntity<?> getAllStudents(Long studentId){
         System.out.println("id: "+studentId);
         Collection<StudentDTO> studentDTOS = studentService.getAllStudents();
@@ -35,7 +35,7 @@ public class StudentController {
 
     }
 
-    @GetMapping("/students/{studentId}")
+    @GetMapping("/{studentId}")
     public ResponseEntity<?> getStudent(@PathVariable Long studentId){
         StudentDTO studentDTO = studentService.getStudent(studentId);
          if(studentDTO == null){
@@ -45,14 +45,14 @@ public class StudentController {
         return new ResponseEntity<StudentDTO>(studentDTO, HttpStatus.OK);
     }
 
-    @PostMapping("/students")
+    @PostMapping
     public ResponseEntity<?> addStudent(@RequestBody StudentDTO studentDTO){
          StudentDTO stdDTO = studentService.createStudent(studentDTO);
          return new ResponseEntity<StudentDTO>(stdDTO, HttpStatus.OK);
 
     }
 
-    @DeleteMapping("/students/{studentId}")
+    @DeleteMapping("/{studentId}")
     public ResponseEntity<?> deleteStudent(@PathVariable Long studentId){
         Long numOfStudentDeleted = studentService.deleteStudent(studentId);
 
@@ -67,7 +67,7 @@ public class StudentController {
 
     }
 
-    @PutMapping("/students/{studentId}")
+    @PutMapping("//{studentId}")
     public ResponseEntity<?> updateStudent(@PathVariable Long studentId, @RequestBody StudentDTO studentDTO){
         StudentDTO studDTO = studentService.updateStudent(studentId, studentDTO);
         if(studDTO == null) {

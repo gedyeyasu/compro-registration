@@ -1,10 +1,10 @@
-package com.miu.registration.service.CourseServiceImpl;
+package com.miu.registration.service.Impl;
 
 import com.miu.registration.service.DTO.CourseDTO;
 import com.miu.registration.domain.Course;
 import com.miu.registration.repositories.CourseRepo;
-import com.miu.registration.service.Adaptors.CourseAdapter;
-import com.miu.registration.service.CourseServiceInterface;
+import com.miu.registration.service.Adapters.CourseAdapter;
+import com.miu.registration.service.ICourseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class CourseServiceImpl implements CourseServiceInterface {
+public class CourseService implements ICourseService {
 
     @Autowired
     CourseRepo courseRepo;

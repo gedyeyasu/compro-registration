@@ -1,4 +1,4 @@
-package com.miu.registration.service.AcadamicBlockService;
+package com.miu.registration.service.Impl;
 
 
 
@@ -6,8 +6,8 @@ import com.miu.registration.service.DTO.AcademicBlockDTO;
 import com.miu.registration.domain.AcademicBlock;
 
 import com.miu.registration.repositories.AcademicBlockRepo;
-import com.miu.registration.service.AcademicBlockService;
-import com.miu.registration.service.Adaptors.AcademicBlockAdaptor;
+import com.miu.registration.service.IAcademicBlockService;
+import com.miu.registration.service.Adapters.AcademicBlockAdaptor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
-public class AcademicBlockServiceImpl implements AcademicBlockService {
+public class AcademicBlockService implements IAcademicBlockService {
 
     private final AcademicBlockRepo academicBlockRepo;
 

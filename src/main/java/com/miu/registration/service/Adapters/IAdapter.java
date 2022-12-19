@@ -1,4 +1,4 @@
-package com.miu.registration.service.Adaptors;
+package com.miu.registration.service.Adapters;
 
 import java.util.List;
 

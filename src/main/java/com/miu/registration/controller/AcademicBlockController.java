@@ -1,8 +1,9 @@
 package com.miu.registration.controller;
 
+
+import com.miu.registration.exception.NotFoundException;
+import com.miu.registration.service.IAcademicBlockService;
 import com.miu.registration.service.DTO.AcademicBlockDTO;
-import com.miu.registration.currentTypeError.ErrorOccured;
-import com.miu.registration.service.AcademicBlockService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,7 +16,7 @@ import java.util.Collection;
 @RequestMapping("/academicBlock")
 public class AcademicBlockController {
 
-    private final AcademicBlockService academicBlockService;
+    private final IAcademicBlockService academicBlockService;
 
     @GetMapping
     public ResponseEntity<?> displayAcademicBlock(){
@@ -28,7 +29,8 @@ public class AcademicBlockController {
     public ResponseEntity<?> displayAcademicBlockById(@PathVariable("id") long id){
         AcademicBlockDTO academicBlockDTO = academicBlockService.getAcademicBlock(id);
         if(academicBlockDTO ==null){
-            return new ResponseEntity<>(new ErrorOccured("not available"),HttpStatus.NOT_FOUND);
+            return new ResponseEntity<NotFoundException>(new NotFoundException("Academic Block with " +
+                    "Id= "+id+" not found."),HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<>(academicBlockDTO, HttpStatus.OK);
     }
@@ -39,13 +41,14 @@ public class AcademicBlockController {
         return new ResponseEntity<AcademicBlockDTO>(academicBlockDTO,HttpStatus.OK);
     }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/{id}")
 
     public ResponseEntity<?> deleteAcademicBlock(@PathVariable("id") long id){
 
        AcademicBlockDTO academicBlockDTO = academicBlockService.getAcademicBlock(id);
        if(academicBlockDTO ==null){
-           return new ResponseEntity<>(new ErrorOccured("not available"),HttpStatus.NOT_FOUND);
+           return new ResponseEntity<NotFoundException>(new NotFoundException("Academic Block with " +
+                   "Id= "+id+" not found."),HttpStatus.NOT_FOUND);
        }
 
        academicBlockService.delete(id);

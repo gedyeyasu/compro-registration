@@ -6,7 +6,7 @@ import com.miu.registration.service.DTO.RegistrationEventDTO;
 
 import java.util.List;
 
-public interface RegistrationEventInterface {
+public interface IRegistrationEventService {
 
     public List<RegistrationEvent> getAllRegistrationEvent();
 

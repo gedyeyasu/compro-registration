@@ -1,4 +1,4 @@
-package com.miu.registration.service.Adaptors;
+package com.miu.registration.service.Adapters;
 
 import com.miu.registration.service.DTO.FacultyDTO;
 import com.miu.registration.domain.Faculty;

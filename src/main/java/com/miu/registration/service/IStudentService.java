@@ -1,6 +1,6 @@
 package com.miu.registration.service;
 
-import com.miu.registration.domain.Student;
+import com.miu.registration.service.DTO.StudentDTO;
 
 import java.util.Collection;
 

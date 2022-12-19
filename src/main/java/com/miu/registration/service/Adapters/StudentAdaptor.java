@@ -1,4 +1,4 @@
-package com.miu.registration.service.Adaptors;//package com.miu.registration.service.Adaptors;
+package com.miu.registration.service.Adapters;//package com.miu.registration.service.Adaptors;
 //
 //import com.miu.registration.DTO.StudentDTO;
 //

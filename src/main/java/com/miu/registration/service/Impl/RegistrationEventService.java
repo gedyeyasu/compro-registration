@@ -1,10 +1,10 @@
-package com.miu.registration.service.RegistrationEventSerImpl;
+package com.miu.registration.service.Impl;
 
 
 import com.miu.registration.repositories.RegistrationEventRepository;
 import com.miu.registration.service.DTO.RegistrationEventDTO;
 import com.miu.registration.domain.RegistrationEvent;
-import com.miu.registration.service.RegistrationEventInterface;
+import com.miu.registration.service.IRegistrationEventService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class RegistrationEventService implements RegistrationEventInterface {
+public class RegistrationEventService implements IRegistrationEventService {
 
     @Autowired
     private RegistrationEventRepository registrationEventRepository;

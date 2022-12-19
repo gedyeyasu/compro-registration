@@ -1,4 +1,4 @@
-package com.miu.registration.service.RegistrationRequestSeriviceImpl;
+package com.miu.registration.service.Impl;
 
 
 
@@ -6,8 +6,8 @@ import com.miu.registration.service.DTO.RegistrationRequestDTO;
 import com.miu.registration.domain.RegistrationRequest;
 
 import com.miu.registration.repositories.RegistrationRequestRepository;
-import com.miu.registration.service.Adaptors.RegistrationRequestAdaptor;
-import com.miu.registration.service.RegistrationRequestService;
+import com.miu.registration.service.Adapters.RegistrationRequestAdaptor;
+import com.miu.registration.service.IRegistrationRequestService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
-public class RegistrationRequestServiceImpl implements RegistrationRequestService {
+public class RegistrationRequestService implements IRegistrationRequestService {
 
     private final RegistrationRequestRepository requestRepository;
 

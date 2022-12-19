@@ -5,7 +5,7 @@ import com.miu.registration.service.DTO.CourseOfferingDTO;
 
 import java.util.List;
 
-public interface CourseOffServiceInterface {
+public interface ICourseOfferingService {
      CourseOffering addCourseOffering(CourseOfferingDTO courseOfferingDTO);
 
    List<CourseOfferingDTO> getAllCourseOffering();

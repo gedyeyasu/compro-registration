@@ -1,18 +1,12 @@
 package com.miu.registration;
 
-import com.miu.registration.domain.Address;
-import com.miu.registration.domain.Student;
-import com.miu.registration.repositories.AddressRepository;
-import com.miu.registration.repositories.StudentRepository;
-import com.miu.registration.service.AddressDTO;
-import com.miu.registration.service.StudentDTO;
-import com.miu.registration.service.StudentService;
+import com.miu.registration.service.DTO.AddressDTO;
+import com.miu.registration.service.DTO.StudentDTO;
+import com.miu.registration.service.Impl.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.domain.EntityScan;
-import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication
 //@EnableJpaRepositories("com.miu.registration.repositories")

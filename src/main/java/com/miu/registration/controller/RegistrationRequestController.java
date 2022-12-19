@@ -1,9 +1,7 @@
 package com.miu.registration.controller;
-
-
+import com.miu.registration.exception.NotFoundException;
 import com.miu.registration.service.DTO.RegistrationRequestDTO;
-import com.miu.registration.currentTypeError.ErrorOccured;
-import com.miu.registration.service.RegistrationRequestService;
+import com.miu.registration.service.IRegistrationRequestService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,7 +14,7 @@ import java.util.Collection;
 @RequestMapping("/request")
 public class RegistrationRequestController {
 
-    private final RegistrationRequestService requestService;
+    private final IRegistrationRequestService requestService;
 
     @GetMapping
     public ResponseEntity<?> displayRegistrationRequest(){
@@ -28,7 +26,8 @@ public class RegistrationRequestController {
     public ResponseEntity<?> displayRequestById(@PathVariable("id") long id){
         RegistrationRequestDTO requestDTO =requestService.getSubmittedRequest(id);
         if(requestDTO==null){
-            return new ResponseEntity<ErrorOccured>(new ErrorOccured("not available"),HttpStatus.NOT_FOUND);
+            return new ResponseEntity<NotFoundException>(new NotFoundException("Registration Request with " +
+                    "Id= "+id+" not found."),HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<>(requestDTO,HttpStatus.OK);
     }
@@ -47,7 +46,8 @@ public class RegistrationRequestController {
     public ResponseEntity<?> deleteRequests(@PathVariable long id){
         RegistrationRequestDTO requestDTO = requestService.getSubmittedRequest(id);
         if(requestDTO==null){
-            return new ResponseEntity<>(new ErrorOccured("not available"),HttpStatus.NOT_FOUND);
+            return new ResponseEntity<NotFoundException>(new NotFoundException("Registration Request with " +
+                    "Id= "+id+" not found."),HttpStatus.NOT_FOUND);
         }
         requestService.deleteRequest(id);
         return new ResponseEntity<>(requestDTO,HttpStatus.NO_CONTENT);

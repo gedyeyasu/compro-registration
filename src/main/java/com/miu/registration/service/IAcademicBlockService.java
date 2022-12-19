@@ -9,7 +9,7 @@ import com.miu.registration.service.DTO.AcademicBlockDTO;
 
 import java.util.Collection;
 
-public interface AcademicBlockService {
+public interface IAcademicBlockService {
 
     Collection<AcademicBlockDTO> getAll();
     AcademicBlockDTO getAcademicBlock(long id);

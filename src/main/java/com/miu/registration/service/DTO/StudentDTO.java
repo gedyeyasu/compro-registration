@@ -1,12 +1,9 @@
-package com.miu.registration.service;
+package com.miu.registration.service.DTO;
 
-import com.miu.registration.domain.Address;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.CascadeType;
-import javax.persistence.ManyToOne;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

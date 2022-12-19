@@ -1,11 +1,9 @@
-package com.miu.registration.service.Adaptors;
+package com.miu.registration.service.Adapters;
 
 import com.miu.registration.service.DTO.CourseDTO;
 import com.miu.registration.domain.Course;
 
 public class CourseAdapter {
-
-
     public  static Course  fromCourseDTO(CourseDTO courseDTO){
 
         Course course=new Course();

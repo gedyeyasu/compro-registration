@@ -1,8 +1,7 @@
 package com.miu.registration.controller;
-
+import com.miu.registration.exception.NotFoundException;
+import com.miu.registration.service.ICourseService;
 import com.miu.registration.service.DTO.CourseDTO;
-import com.miu.registration.currentTypeError.ErrorOccured;
-import com.miu.registration.service.CourseServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 public class CourseController {
 
     @Autowired
-    CourseServiceInterface courseService;
+    ICourseService courseService;
 
     @GetMapping
     public ResponseEntity<?> getAll(){
@@ -22,7 +21,8 @@ public class CourseController {
         if(course.size()!=0){
             return new ResponseEntity<>(course, HttpStatus.OK);
         }else{
-            return new ResponseEntity<>(new ErrorOccured("not found"),HttpStatus.NOT_FOUND);
+            return new ResponseEntity<NotFoundException>(new NotFoundException("No Course Found."),
+                    HttpStatus.NOT_FOUND);
         }
 
     }
@@ -35,7 +35,8 @@ public class CourseController {
         if(course!=null){
             return new ResponseEntity<>(course, HttpStatus.OK);
         }else{
-            return new ResponseEntity<>(new ErrorOccured("couldnot find course"),HttpStatus.NOT_FOUND);
+            return new ResponseEntity<NotFoundException>(new NotFoundException("Course with " +
+                    "Id= "+id+" not found."),HttpStatus.NOT_FOUND);
         }
 
     }
@@ -54,7 +55,7 @@ public class CourseController {
         if(course!=null){
             return new ResponseEntity<>(course, HttpStatus.OK);
         }else{
-            return new ResponseEntity<>(new ErrorOccured("not saved"),HttpStatus.NOT_FOUND);
+            return new ResponseEntity<NotFoundException>(new NotFoundException("Course not saved."),HttpStatus.NOT_FOUND);
         }
 
     }

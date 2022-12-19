@@ -1,8 +1,7 @@
-package com.miu.registration.service.Adaptors;
+package com.miu.registration.service.Adapters;
 
 import com.miu.registration.domain.Address;
 import com.miu.registration.service.DTO.AddressDTO;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
