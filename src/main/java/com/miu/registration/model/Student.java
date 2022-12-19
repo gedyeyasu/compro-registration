@@ -6,8 +6,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @Data
@@ -23,6 +21,10 @@ public class Student extends Person {
 
     @ManyToOne(cascade = CascadeType.PERSIST)
     private Address homeAddress;
+
+
+    @ManyToOne
+    private RegistrationGroup registrationGroups;
 
 
     public Student(String firstName, String lastName, String email, String userName,

@@ -3,7 +3,6 @@ package com.miu.registration.Service.Implementation;
 import com.miu.registration.Repository.RegistrationEventRepository;
 import com.miu.registration.Service.RegistrationEventInterface;
 import com.miu.registration.dto.RegistrationEventDTO;
-import com.miu.registration.model.Registration;
 import com.miu.registration.model.RegistrationEvent;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,8 +39,10 @@ public class RegistrationEventService implements RegistrationEventInterface {
     }
 
     @Override
-    public  RegistrationEvent getlatesetevent() {
-        return (RegistrationEvent) registrationEventRepository.findAll(Sort.by(Sort.Direction.DESC,""));
+    public List<RegistrationEvent> getlatesetevent() {
+
+        Sort sort=Sort.by(Sort.Order.desc("endDate"));
+        return  registrationEventRepository.findAll(sort);
     }
 
 

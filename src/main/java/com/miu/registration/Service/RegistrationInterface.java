@@ -7,5 +7,5 @@ import java.util.List;
 
 @Service
 public interface RegistrationInterface  {
-    public List<Registration> RegistrationList();
+    public List<Registration> registrationList();
 }

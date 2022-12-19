@@ -14,7 +14,7 @@ public class RegistrationService implements RegistrationInterface {
     @Autowired
     private RegistrationRepository registrationRepository;
     @Override
-    public List<Registration> RegistrationList() {
+    public List<Registration> registrationList() {
         return registrationRepository.findAll();
     }
 }

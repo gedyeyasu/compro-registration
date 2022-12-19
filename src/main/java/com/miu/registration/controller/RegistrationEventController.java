@@ -16,9 +16,9 @@ import java.util.Date;
 import java.util.List;
 
 @RestController
-//@RequestMapping(value = "/registrationGroups")
+@RequestMapping(value = "/registrationEvents")
 
-public class RegistrationAllController {
+public class RegistrationEventController {
 
     @Autowired
     private RegistrationEventService registrationEventService;
@@ -31,25 +31,28 @@ public class RegistrationAllController {
     @Autowired
     private AcademicBlockSerivce academicBlockSerivce;
 // FOT RegistrationEvent CRUD
-    @PostMapping("/registartionEvents")
-    public void viewRegistrationEvent(@RequestBody RegistrationEventDTO registrationEventDTO){
+    @PostMapping("")
+    public void addRegistrationEvent(@RequestBody RegistrationEventDTO registrationEventDTO){
         registrationEventService.viewRegisterationEvent(registrationEventDTO);
 
     }
-    @GetMapping("/registartionEvents/getevent")
-    public List<RegistrationEvent> fetchRegistrationList()
-    {
-        return registrationEventService.getFetchRegistrationList();
-    }
-    @GetMapping("/registration-events/latest")
-    public RegistrationEvent getAlllatesetOffering(){
-        return registrationEventService.getlatesetevent();
+//    @GetMapping("/")
+//    public List<RegistrationEvent> fetchRegistrationList()
+//    {
+//        return registrationEventService.getFetchRegistrationList();
+//    }
+    @GetMapping("/latest")
+    public List<RegistrationEvent> getAlllatesetOffering(){
+        return  registrationEventService.getlatesetevent();
+
     }
     @PutMapping("/registartionEvents/{startevent}/{endevent}")
      public List<RegistrationEvent> updateEvent(@PathVariable Long updateid, @PathVariable Date startDate, @PathVariable Date endDate){
         return registrationEventService.updateevents(updateid,startDate,endDate);
 
     }
+
+
     @DeleteMapping ("/registrationEvents/{id}")
     public String  deleteRegistrationList(@PathVariable("id")Long registrationeventId){
         registrationEventService.deleteRegistrationList(registrationeventId);
@@ -58,11 +61,6 @@ public class RegistrationAllController {
     }
     // FOR Registration CRUD  ---- use case - 6
 
-    @GetMapping("/registrations")
-    public List<Registration> RegistrationList()
-    {
-        return registrationService.RegistrationList();
-    }
 
 
 

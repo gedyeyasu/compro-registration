@@ -6,9 +6,6 @@ import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
@@ -29,6 +26,8 @@ public class RegistrationEvent {
     @DateTimeFormat(style = "yyyy-MM-dd")
     private Date endDate ;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    private List<RegistrationGroups> registrationGroupsList ;
+
+    @JoinColumn(name="registrationeventid")
+    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    private List<RegistrationGroup> registrationGroupsList ;
 }
