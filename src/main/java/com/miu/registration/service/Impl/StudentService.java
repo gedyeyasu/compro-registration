@@ -4,6 +4,9 @@ import com.miu.registration.domain.Address;
 import com.miu.registration.domain.Student;
 import com.miu.registration.repositories.AddressRepository;
 import com.miu.registration.repositories.StudentRepository;
+import com.miu.registration.service.Adaptors.AddressAdapter;
+import com.miu.registration.service.Adaptors.StudentAdapter;
+import com.miu.registration.service.DTO.StudentDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

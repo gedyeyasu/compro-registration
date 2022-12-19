@@ -1,12 +1,14 @@
-package com.miu.registration.service;
+package com.miu.registration.service.Adaptors;
 
 import com.miu.registration.domain.Address;
+import com.miu.registration.service.DTO.AddressDTO;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Component
+@Service
 public class AddressAdapter implements  IAdapter<Address, AddressDTO> {
     @Override
     public Address getDomainFromDTO(AddressDTO addressDTO) {

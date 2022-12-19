@@ -1,12 +1,10 @@
-package com.miu.registration.service;
+package com.miu.registration.service.Adaptors;
 
-import com.miu.registration.domain.Address;
 import com.miu.registration.domain.Student;
+import com.miu.registration.service.DTO.StudentDTO;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.ComponentScans;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 @Component
