@@ -52,14 +52,31 @@ public class StudentController {
 
     }
 
-//    @PutMapping("/students")
-//    public ResponseEntity<?> updateStudent(@PathVariable Long studentId, @RequestBody StudentDTO studentDTO){
-//        StudentDTO studDTO = studentService.getStudent(studentId);
-//        if(studDTO==null){
-//            return new ResponseEntity<NotFoundException>(new NotFoundException("Student with Id= "
-//                    + studentId + " not found."), HttpStatus.NOT_FOUND);
-//        }
-//
-//
-//    }
+    @DeleteMapping("/students/{studentId}")
+    public ResponseEntity<?> deleteStudent(@PathVariable Long studentId){
+        Long numOfStudentDeleted = studentService.deleteStudent(studentId);
+
+        if(numOfStudentDeleted > 0) {
+            return new ResponseEntity<String>("Student with Id= "+studentId+" deleted successfully.",
+                    HttpStatus.OK);
+        }
+        else{
+            return new ResponseEntity<NotFoundException>(new NotFoundException("Student with Id= "+studentId+" not found."),
+                    HttpStatus.NOT_FOUND);
+        }
+
+    }
+
+    @PutMapping("/students/{studentId}")
+    public ResponseEntity<?> updateStudent(@PathVariable Long studentId, @RequestBody StudentDTO studentDTO){
+        StudentDTO studDTO = studentService.updateStudent(studentId, studentDTO);
+        if(studDTO == null) {
+            return new ResponseEntity<NotFoundException>(new NotFoundException("Student with ID= " +
+                    studentId + " isn't found."),HttpStatus.NOT_FOUND );
+        }
+
+        return new ResponseEntity<String>("Student with Id= "+studentId+" updated successfully."
+        , HttpStatus.OK);
+
+    }
 }

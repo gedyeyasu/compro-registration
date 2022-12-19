@@ -10,4 +10,8 @@ public interface IStudentService {
     public StudentDTO getStudent(Long studentId);
 
     public Collection<StudentDTO> getAllStudents();
+
+    public Long deleteStudent(Long studentId);
+
+    public StudentDTO updateStudent(Long studentId, StudentDTO studentDTO);
 }

@@ -51,4 +51,22 @@ public class StudentService implements IStudentService{
     public Collection<StudentDTO> getAllStudents() {
         return studentAdapter.getDTOsFromDomains(studentRepository.findAll());
     }
+    @Override
+    public Long deleteStudent(Long studentId){
+        Long numOfDeletedStudents = studentRepository.deleteByStudentId(studentId);
+        return numOfDeletedStudents;
+    }
+    @Override
+    public StudentDTO updateStudent(Long studentId, StudentDTO studentDTO){
+        StudentDTO oldStudent = getStudent(studentId);
+        if(oldStudent==null)
+            return null;
+        studentRepository.deleteByStudentId(studentId);
+
+        addressRepository.save(addressAdapter.getDomainFromDTO(studentDTO.getMailAddress()));
+        addressRepository.save(addressAdapter.getDomainFromDTO(studentDTO.getHomeAddress()));
+        studentRepository.save(studentAdapter.getDomainFromDTO(studentDTO));
+
+        return studentDTO;
+    }
 }
