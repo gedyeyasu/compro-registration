@@ -4,18 +4,25 @@ import lombok.*;
 
 import java.util.ArrayList;
 import java.util.Collection;
-@Getter
-@Setter
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
 public class CourseOfferingDTO {
-
-    Integer  initialValue=50;
     private Integer capacity=50;
     private Collection<RegistrationDTO> registrationsOfStudents =new ArrayList<>();
     private CourseDTO courseDTO;
-    private FacultyDTO faculty;
-    private Integer availableSeat=capacity-registrationsOfStudents.size();
-    private AcademicBlockDTO academicBlockDTO;
+    private FacultyDTO facultyDTO;
+    private Integer availableSeat;
+
+    private String code;
+    public Integer getAvailableSeat() {
+        return capacity-registrationsOfStudents.size();
+    }
+
+    public void setAvailableSeat(Integer availableSeat) {
+        this.availableSeat = availableSeat;
+    }
+    public void addRegistrationOfStudents(Collection<RegistrationDTO> registrationsOfStudents){
+        this.registrationsOfStudents.addAll(registrationsOfStudents);
+    }
 }

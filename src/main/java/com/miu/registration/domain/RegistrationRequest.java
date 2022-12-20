@@ -1,21 +1,18 @@
 package com.miu.registration.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
-
+@Entity
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Getter
-@Setter
-@Entity
 public class RegistrationRequest {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
+    private int priority;
 
     @ManyToOne(cascade = {CascadeType.PERSIST,CascadeType.MERGE})
     private CourseOffering courseOffering;

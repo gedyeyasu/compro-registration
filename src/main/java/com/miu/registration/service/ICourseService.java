@@ -8,13 +8,13 @@ import java.util.List;
 public interface ICourseService {
     public Course addCourseOffering(CourseDTO courseDTO) ;
 
-    public List<CourseDTO> getAllCourse() ;
+    public List<CourseDTO> getAllCourses() ;
 
-    public CourseDTO findById(Long id) ;
+    public CourseDTO getCourse(String code) ;
 
-    public CourseDTO add(CourseDTO courseDTO) ;
+    public CourseDTO addCourse(CourseDTO courseDTO) ;
 
-    public void deleteById(Long id) ;
+    public Long deleteCourse(String code) ;
 
-    public void update(CourseDTO courseDTO, Long id) ;
+    public CourseDTO updateCourse(String code, CourseDTO courseDTO);
 }

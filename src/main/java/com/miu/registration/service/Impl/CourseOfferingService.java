@@ -2,8 +2,8 @@ package com.miu.registration.service.Impl;
 
 import com.miu.registration.service.DTO.CourseOfferingDTO;
 import com.miu.registration.domain.CourseOffering;
-import com.miu.registration.repositories.CourseOfferingRepo;
-import com.miu.registration.service.Adapters.CourseOfferingAdaptor;
+import com.miu.registration.repositories.CourseOfferingRepository;
+import com.miu.registration.service.Adapters.CourseOfferingAdapter;
 import com.miu.registration.service.ICourseOfferingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,53 +15,52 @@ import java.util.stream.Collectors;
 public class CourseOfferingService implements ICourseOfferingService {
 
     @Autowired
-    CourseOfferingRepo courseOfferingRepo;
+    CourseOfferingRepository courseOfferingRepository;
+
+    @Autowired
+    CourseOfferingAdapter courseOfferingAdapter;
 
 
     public CourseOffering addCourseOffering(CourseOfferingDTO courseOfferingDTO){
-
-    var a= courseOfferingRepo.save(CourseOfferingAdaptor.fromCourseOfferingDTO(courseOfferingDTO));
-
-
+        var a= courseOfferingRepository.save(courseOfferingAdapter.getDomainFromDTO(courseOfferingDTO));
         return a;
     }
 
     public List<CourseOfferingDTO> getAllCourseOffering(){
 
-           return courseOfferingRepo.findAll().stream()
-                   .map(CourseOfferingAdaptor::fromCourseOffering).collect(Collectors.toList());
+           return courseOfferingRepository.findAll().stream()
+                   .map(courseOfferingAdapter::getDTOFromDomain).collect(Collectors.toList());
     }
 
     public CourseOfferingDTO findById(Long id){
-      var a=  courseOfferingRepo.findById(id);
+      var a=  courseOfferingRepository.findById(id);
       if(a.isPresent())
-       return  CourseOfferingAdaptor.fromCourseOffering(a.get());
+       return  courseOfferingAdapter.getDTOFromDomain(a.get());
       else
           return null;
     }
 
      public CourseOffering add(CourseOfferingDTO courseOfferingDTO){
-        CourseOffering courseOffering=CourseOfferingAdaptor.fromCourseOfferingDTO(courseOfferingDTO);
-       return  courseOfferingRepo.save(courseOffering);
+        CourseOffering courseOffering= courseOfferingAdapter.getDomainFromDTO(courseOfferingDTO);
+       return  courseOfferingRepository.save(courseOffering);
      }
 
 
      public void deleteById(Long id){
-        courseOfferingRepo.deleteById(id);
+        courseOfferingRepository.deleteById(id);
      }
 
     public void update(CourseOfferingDTO courseOfferingDTO ,Long id){
-        var courseOffering=courseOfferingRepo.findById(id);
+        var courseOffering= courseOfferingRepository.findById(id);
         if(courseOffering.isPresent()&&courseOfferingDTO!=null){
-         CourseOffering courseOffering1=courseOffering.get();
-         CourseOffering courseOffering2=CourseOfferingAdaptor.fromCourseOfferingDTO(courseOfferingDTO);
+             CourseOffering courseOffering1=courseOffering.get();
+             CourseOffering courseOffering2= courseOfferingAdapter.getDomainFromDTO(courseOfferingDTO);
 
-         courseOffering1.setCourse(courseOffering2.getCourse());
-         courseOffering1.setFaculty(courseOffering2.getFaculty());
-         courseOffering1.setRegistrationsOfStudents(courseOffering2.getRegistrationsOfStudents());
-         courseOffering1.setCapacity(courseOffering2.getCapacity());
-        courseOffering1.setAcademicBlock(courseOffering2.getAcademicBlock());
-         courseOfferingRepo.save(courseOffering1);
+             courseOffering1.setCourse(courseOffering2.getCourse());
+             courseOffering1.setFaculty(courseOffering2.getFaculty());
+             courseOffering1.setRegistrationsOfStudents(courseOffering2.getRegistrationsOfStudents());
+             courseOffering1.setCapacity(courseOffering2.getCapacity());
+             courseOfferingRepository.save(courseOffering1);
         }
 
     }

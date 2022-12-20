@@ -1,7 +1,10 @@
 package com.miu.registration;
 
+import com.miu.registration.domain.Course;
 import com.miu.registration.service.DTO.AddressDTO;
+import com.miu.registration.service.DTO.CourseDTO;
 import com.miu.registration.service.DTO.StudentDTO;
+import com.miu.registration.service.Impl.CourseService;
 import com.miu.registration.service.Impl.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -20,6 +23,8 @@ public class RegistrationApplication implements CommandLineRunner {
 
 	@Autowired
 	StudentService studentService;
+	@Autowired
+	CourseService courseService;
 	public static void main(String[] args) {
 
 		SpringApplication.run(RegistrationApplication.class, args);
@@ -27,6 +32,12 @@ public class RegistrationApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
+		addStudent();
+		addCourse();
+
+	}
+
+	public void addStudent(){
 		StudentDTO tewodroes = new StudentDTO("Tewodroes", "Hailu",
 				"tewodroes.hailu@miu.edu", 615167L);
 		StudentDTO gedeon = new StudentDTO("Gedeon", "Tona",
@@ -41,6 +52,10 @@ public class RegistrationApplication implements CommandLineRunner {
 
 		studentService.createStudent(tewodroes);
 		studentService.createStudent(gedeon);
+	}
 
+	public void addCourse(){
+		CourseDTO EA = new CourseDTO("CS544","Enterprise Application", "Development of Enterprise applications using modern technologies.");
+		courseService.addCourse(EA);
 	}
 }

@@ -1,9 +1,11 @@
 package com.miu.registration.service.Impl;
 
+import com.miu.registration.service.Adapters.CourseOfferingAdapter;
 import com.miu.registration.service.DTO.CourseDTO;
 import com.miu.registration.domain.Course;
-import com.miu.registration.repositories.CourseRepo;
+import com.miu.registration.repositories.CourseRepository;
 import com.miu.registration.service.Adapters.CourseAdapter;
+import com.miu.registration.service.DTO.StudentDTO;
 import com.miu.registration.service.ICourseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,54 +15,50 @@ import java.util.stream.Collectors;
 
 @Service
 public class CourseService implements ICourseService {
+    @Autowired
+    CourseRepository courseRepository;
 
     @Autowired
-    CourseRepo courseRepo;
+    CourseAdapter courseAdapter;
 
     public Course addCourseOffering(CourseDTO courseDTO) {
 
-        var a = courseRepo.save(CourseAdapter.fromCourseDTO(courseDTO));
-
-
+        var a = courseRepository.save(courseAdapter.getDomainFromDTO(courseDTO));
         return a;
     }
 
-    public List<CourseDTO> getAllCourse() {
-
-        return courseRepo.findAll().stream()
-                .map(CourseAdapter::fromCourse).collect(Collectors.toList());
+    public List<CourseDTO> getAllCourses() {
+        return courseRepository.findAll().stream()
+                .map(courseAdapter::getDTOFromDomain).collect(Collectors.toList());
     }
 
-    public CourseDTO findById(Long id) {
-        var a = courseRepo.findById(id);
-        if (a.isPresent())
-            return CourseAdapter.fromCourse(a.get());
-        else
+    public CourseDTO getCourse(String code) {
+        Course course = courseRepository.findCourseByCode(code);
+        if (course == null)
             return null;
+        return courseAdapter.getDTOFromDomain(course);
     }
 
-    public CourseDTO add(CourseDTO courseDTO) {
-        Course course = CourseAdapter.fromCourseDTO(courseDTO);
-        return CourseAdapter.fromCourse(courseRepo.save(course));
+    public CourseDTO addCourse(CourseDTO courseDTO) {
+        Course course = courseAdapter.getDomainFromDTO(courseDTO);
+        return courseAdapter.getDTOFromDomain(courseRepository.save(course));
     }
 
 
-    public void deleteById(Long id) {
-        courseRepo.deleteById(id);
+    public Long deleteCourse(String code) {
+        Long numOfCoursesDeleted = courseRepository.deleteCourseByCode(code);
+        return numOfCoursesDeleted;
     }
 
-    public void update(CourseDTO courseDTO, Long id) {
-        var course = courseRepo.findById(id);
-        if (course.isPresent() && courseDTO != null) {
-            Course course1 = course.get();
-            Course course2 = CourseAdapter.fromCourseDTO(courseDTO);
+    public CourseDTO updateCourse(String code, CourseDTO courseDTO) {
+        CourseDTO oldCourse = getCourse(code);
+        if (oldCourse==null)
+            return  null;
+        courseRepository.deleteCourseByCode(code);
 
-            course1.setName(course2.getName());
-            course1.setCode(course2.getCode());
-            course1.setDescription(course2.getDescription());
+        courseRepository.save(courseAdapter.getDomainFromDTO(courseDTO));
 
-            courseRepo.save(course1);
+        return courseDTO;
 
-        }
     }
 }

@@ -1,5 +1,6 @@
 package com.miu.registration.domain;
 
+import com.miu.registration.service.DTO.RegistrationDTO;
 import lombok.*;
 
 import javax.persistence.*;
@@ -16,13 +17,8 @@ public class CourseOffering {
     @Id
     @GeneratedValue
     private Long id;
+    private String code;
 
-    /**
-     Each CourseOffering also has a capacity and a calculated field “availableSeats”.
-     AvailableSeats is calculated based on (Capacity – Number of students registered)
-      */
-//    @Transient
-//    Integer  initialValue=50;
     private Integer capacity=50;
     @OneToMany(cascade = {CascadeType.PERSIST,CascadeType.MERGE},fetch = FetchType.EAGER)
     @JoinColumn
@@ -32,23 +28,18 @@ public class CourseOffering {
 
     @ManyToOne(cascade = {CascadeType.PERSIST,CascadeType.MERGE})
     private Faculty faculty;
-
-    @ManyToOne(cascade = {CascadeType.PERSIST,CascadeType.MERGE})
-    private AcademicBlock academicBlock;
-    private Integer availableSeat=capacity-registrationsOfStudents.size();
-
+    @Transient
+    private Integer availableSeat;
+    public void addRegistrationOfStudents(Collection<Registration> registrationsOfStudents){
+        this.registrationsOfStudents.addAll(registrationsOfStudents);
+    }
     public CourseOffering(Integer capacity, Collection<Registration> registrationsOfStudents) {
         this.capacity = capacity;
         this.registrationsOfStudents = registrationsOfStudents;
     }
 
     public Integer getAvailableSeat() {
-
-        if(getCapacity()!=0){
-            return availableSeat;
-        }else{
-            return 0;
-        }
+       return capacity-registrationsOfStudents.size();
     }
 
     public void setAvailableSeat(Integer availableSeat) {

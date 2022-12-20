@@ -13,7 +13,7 @@ import java.util.Collection;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/academicBlock")
+@RequestMapping("/academic-blocks")
 public class AcademicBlockController {
 
     private final IAcademicBlockService academicBlockService;

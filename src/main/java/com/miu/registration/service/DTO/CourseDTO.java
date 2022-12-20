@@ -2,11 +2,9 @@ package com.miu.registration.service.DTO;
 
 import lombok.*;
 
-@Getter
-@Setter
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
 public class CourseDTO {
 
     private String code;

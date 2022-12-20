@@ -5,10 +5,11 @@ package com.miu.registration.service.Impl;
 import com.miu.registration.service.DTO.AcademicBlockDTO;
 import com.miu.registration.domain.AcademicBlock;
 
-import com.miu.registration.repositories.AcademicBlockRepo;
+import com.miu.registration.repositories.AcademicBlockRepository;
 import com.miu.registration.service.IAcademicBlockService;
-import com.miu.registration.service.Adapters.AcademicBlockAdaptor;
+import com.miu.registration.service.Adapters.AcademicBlockAdapter;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
@@ -17,14 +18,17 @@ import java.util.stream.Collectors;
 @Service
 @RequiredArgsConstructor
 public class AcademicBlockService implements IAcademicBlockService {
+    @Autowired
+    private AcademicBlockRepository academicBlockRepository;
 
-    private final AcademicBlockRepo academicBlockRepo;
+    @Autowired
+    private AcademicBlockAdapter academicBlockAdapter;
 
     @Override
     public Collection<AcademicBlockDTO> getAll() {
 
-        Collection<AcademicBlockDTO> academicBlockDTOS=academicBlockRepo.findAll().stream()
-                .map(AcademicBlockAdaptor::fromAcademicBlock).collect(Collectors.toList());
+        Collection<AcademicBlockDTO> academicBlockDTOS= academicBlockRepository.findAll().stream()
+                .map(academicBlockAdapter::getDTOFromDomain).collect(Collectors.toList());
         return academicBlockDTOS;
 
 
@@ -33,19 +37,19 @@ public class AcademicBlockService implements IAcademicBlockService {
     @Override
     public AcademicBlockDTO getAcademicBlock(long id) {
 
-       var academicBlock=academicBlockRepo.findById(id);
-        return academicBlock.map(AcademicBlockAdaptor::fromAcademicBlock).orElse(null);
+       var academicBlock= academicBlockRepository.findById(id);
+        return academicBlock.map(academicBlockAdapter::getDTOFromDomain).orElse(null);
     }
 
     @Override
     public void create(AcademicBlockDTO academicBlockDTO) {
-        academicBlockRepo.save(AcademicBlockAdaptor.fromAcademicDTO(academicBlockDTO));
+        academicBlockRepository.save(academicBlockAdapter.getDomainFromDTO(academicBlockDTO));
 
     }
 
     @Override
     public void delete(long id) {
-        academicBlockRepo.deleteById(id);
+        academicBlockRepository.deleteById(id);
 
     }
 
@@ -53,17 +57,17 @@ public class AcademicBlockService implements IAcademicBlockService {
  // error
     public void update(long id, AcademicBlockDTO academicBlockDTO) {
 
-       var academicBlock1 = academicBlockRepo.findById(id);
+       var academicBlock1 = academicBlockRepository.findById(id);
        if (academicBlock1.isPresent() && academicBlockDTO!=null) {
 
            AcademicBlock academicBlock = academicBlock1.get();
-           AcademicBlock academic = AcademicBlockAdaptor.fromAcademicDTO(academicBlockDTO);
+           AcademicBlock academic = academicBlockAdapter.getDomainFromDTO(academicBlockDTO);
            academicBlock.setCode(academic.getCode());
            academicBlock.setName(academic.getName());
            academicBlock.setStartDate(academic.getEndDate());
            academicBlock.setEndDate(academic.getEndDate());
            academicBlock.setCourseOfferings(academic.getCourseOfferings());
-            academicBlockRepo.save(academicBlock);
+            academicBlockRepository.save(academicBlock);
 
        }
 

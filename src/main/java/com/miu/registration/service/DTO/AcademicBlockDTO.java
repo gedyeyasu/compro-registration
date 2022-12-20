@@ -1,15 +1,13 @@
 package com.miu.registration.service.DTO;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDate;
 import java.util.Collection;
 
-@Getter
-@Setter
-
-
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class AcademicBlockDTO {
     private long id;
     private String code;
@@ -18,4 +16,8 @@ public class AcademicBlockDTO {
     private LocalDate endDate;
 
     private Collection<CourseOfferingDTO> courseOfferings;
+
+    public void addCourseOfferings(Collection<CourseOfferingDTO> courseOfferings){
+        this.courseOfferings.addAll(courseOfferings);
+    }
 }

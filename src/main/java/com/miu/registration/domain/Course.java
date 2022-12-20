@@ -1,17 +1,15 @@
 package com.miu.registration.domain;
 
 import lombok.*;
+import lombok.experimental.FieldNameConstants;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 @Entity
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
-@AllArgsConstructor
-@ToString
 public class Course {
     @Id
     @GeneratedValue
@@ -19,5 +17,4 @@ public class Course {
     private String code;
     private String name;
     private String description;
-
 }

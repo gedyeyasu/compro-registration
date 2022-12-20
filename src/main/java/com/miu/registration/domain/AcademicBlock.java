@@ -1,5 +1,6 @@
 package com.miu.registration.domain;
 
+import com.miu.registration.service.DTO.CourseOfferingDTO;
 import lombok.*;
 
 import javax.persistence.*;
@@ -23,4 +24,8 @@ public class AcademicBlock {
     @OneToMany (cascade = {CascadeType.PERSIST,CascadeType.MERGE})
     @JoinColumn(name = "Academic_Block")
     private Collection<CourseOffering> courseOfferings;
+
+    public void addCourseOfferings(Collection<CourseOffering> courseOfferings){
+        this.courseOfferings.addAll(courseOfferings);
+    }
 }

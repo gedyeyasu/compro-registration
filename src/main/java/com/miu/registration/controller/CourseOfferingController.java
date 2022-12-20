@@ -8,7 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/courseOffering")
+@RequestMapping("/course-offerings")
 
 public class CourseOfferingController {
 
@@ -49,7 +49,6 @@ public class CourseOfferingController {
     }
 
     @PostMapping
-
     public ResponseEntity<?> addCourseOffering(@RequestBody CourseOfferingDTO courseOfferingDTO) {
 
      var courseOffering=courseOffService.add(courseOfferingDTO);

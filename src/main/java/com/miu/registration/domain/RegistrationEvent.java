@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -17,17 +18,15 @@ import java.util.List;
 public class RegistrationEvent {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue
+    private Long Id;
+    @DateTimeFormat(style = "yyyy-MM-dd")
+    private LocalDate startDate;
 
-    private Long registrationeventid;
-    @Temporal(TemporalType.DATE)
     @DateTimeFormat(style = "yyyy-MM-dd")
-    private Date startDate;
-    @Temporal(TemporalType.DATE)
-    @DateTimeFormat(style = "yyyy-MM-dd")
-    private Date endDate ;
+    private LocalDate endDate ;
 
     @OneToMany
-    @JoinColumn(name="re_id")
-    private List<RegistrationGroups> registrationGroupsList = new ArrayList<RegistrationGroups>();
+    @JoinColumn(name="Registration Event")
+    private List<RegistrationGroup> registrationGroupsList = new ArrayList<RegistrationGroup>();
 }
