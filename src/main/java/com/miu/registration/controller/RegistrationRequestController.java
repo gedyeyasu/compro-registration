@@ -38,7 +38,6 @@ public class RegistrationRequestController {
     }
     @PostMapping
     public ResponseEntity<?> saveRequest(@RequestBody RegistrationRequestResponseDTO registrationRequestResponseDTO){
-        System.out.println("post");
         try{
             requestService.createRegistrationRequest(registrationRequestResponseDTO);
             return new ResponseEntity<>(HttpStatus.OK);

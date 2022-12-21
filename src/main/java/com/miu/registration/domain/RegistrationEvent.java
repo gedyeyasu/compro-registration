@@ -8,7 +8,6 @@ import org.springframework.format.annotation.DateTimeFormat;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -27,6 +26,6 @@ public class RegistrationEvent {
     private LocalDate endDate ;
 
     @OneToMany
-    @JoinColumn(name="Registration Event")
-    private List<RegistrationGroup> registrationGroupsList = new ArrayList<RegistrationGroup>();
+    //@JoinColumn(name="Registration Event_Id")
+    private List<RegistrationGroup> registrationGroups = new ArrayList<RegistrationGroup>();
 }
