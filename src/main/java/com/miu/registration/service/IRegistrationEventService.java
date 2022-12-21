@@ -1,6 +1,7 @@
 package com.miu.registration.service;
 
 
+import com.miu.registration.domain.EventStatus;
 import com.miu.registration.domain.RegistrationEvent;
 import com.miu.registration.service.DTO.RegistrationEventDTO;
 
@@ -12,6 +13,4 @@ public interface IRegistrationEventService {
 
 //    public void viewRegisterationEvent(RegistrationEventDTO registrationEventDTO);
     public RegistrationEvent latest(long studentID);
-
-    public boolean isRegistrationEventOpen(long studentId);
 }

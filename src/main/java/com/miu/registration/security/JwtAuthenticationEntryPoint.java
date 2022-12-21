@@ -1,4 +1,4 @@
-package com.miu.registration.config;
+package com.miu.registration.security;
 
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.stereotype.Component;

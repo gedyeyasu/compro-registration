@@ -19,14 +19,13 @@ public abstract class Person {
     private String firstName;
     private String lastName;
     private String email;
-    private String username;
-    private String password;
+    @OneToOne(cascade = CascadeType.ALL)
+    private User user;
 
-    public Person(String firstName, String lastName, String email, String username, String password) {
+    public Person(String firstName, String lastName, String email, User user) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
-        this.username = username;
-        this.password = password;
+        this.user = user;
     }
 }

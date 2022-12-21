@@ -2,16 +2,13 @@ package com.miu.registration.service.Impl;
 
 
 
-import com.miu.registration.domain.CourseOffering;
-import com.miu.registration.domain.RegistrationEvent;
-import com.miu.registration.domain.Student;
+import com.miu.registration.domain.*;
 import com.miu.registration.exception.NotFoundException;
 import com.miu.registration.repositories.CourseOfferingRepository;
 import com.miu.registration.repositories.CourseRepository;
 import com.miu.registration.repositories.StudentRepository;
 import com.miu.registration.service.Adapters.StudentAdapter;
 import com.miu.registration.service.DTO.RegistrationRequestDTO;
-import com.miu.registration.domain.RegistrationRequest;
 
 import com.miu.registration.repositories.RegistrationRequestRepository;
 import com.miu.registration.service.Adapters.RegistrationRequestAdapter;
@@ -70,7 +67,8 @@ public class RegistrationRequestService implements IRegistrationRequestService {
     @Override
     public void createRegistrationRequest(RegistrationRequestResponseDTO registrationRequestResponseDTO) throws Exception {
         long studentId = registrationRequestResponseDTO.getStudentId();
-        if(registrationEventService.isRegistrationEventOpen(studentId)) {
+        RegistrationEvent latestEvent = registrationEventService.latest(studentId);
+        if(latestEvent.getEventStatus() == EventStatus.OPEN) {
             Student student = studentRepository.findByStudentId(studentId);
             if(student==null) {
                 throw new Exception("Student "  + studentId +" is not in the database");

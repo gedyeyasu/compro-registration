@@ -22,15 +22,16 @@ public class Student extends Person{
 
     public Student(String firstName, String lastName, String email,
                    String userName, String password, Long studentId) {
-        super(firstName, lastName, email, userName, password);
+        super(firstName, lastName, email, new User(userName,password, Role.STUDENT));
         this.studentId = studentId;
     }
 
     public Student(String firstName, String lastName, String email, String userName,
                    String password, Long studentId, Address mailAddress, Address homeAddress) {
-        super(firstName, lastName, email, userName, password);
+        super(firstName, lastName, email, new User(userName,password, Role.STUDENT));
         this.studentId = studentId;
         this.mailAddress = mailAddress;
         this.homeAddress = homeAddress;
     }
+
 }

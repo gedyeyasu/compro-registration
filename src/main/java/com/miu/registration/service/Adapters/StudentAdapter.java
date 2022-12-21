@@ -1,6 +1,8 @@
 package com.miu.registration.service.Adapters;
 
+import com.miu.registration.domain.Role;
 import com.miu.registration.domain.Student;
+import com.miu.registration.domain.User;
 import com.miu.registration.service.DTO.StudentDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -21,6 +23,7 @@ public class StudentAdapter implements IAdapter<Student, StudentDTO>{
         student.setEmail(studentDTO.getEmail());
         student.setHomeAddress(addressAdapter.getDomainFromDTO(studentDTO.getHomeAddress()));
         student.setMailAddress(addressAdapter.getDomainFromDTO(studentDTO.getMailAddress()));
+        student.setUser(new User(studentDTO.getUsername(), studentDTO.getPassword(), Role.STUDENT));
 
         return student;
     }

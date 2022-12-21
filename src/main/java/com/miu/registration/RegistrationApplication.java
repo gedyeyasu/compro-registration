@@ -16,14 +16,8 @@ import org.springframework.kafka.annotation.EnableKafka;
 
 @SpringBootApplication
 @EnableKafka
-//@EnableJpaRepositories("com.miu.registration.repositories")
 public class RegistrationApplication implements CommandLineRunner {
-//	@Autowired
-//	StudentRepository studentRepository;
-//	@Autowired
-//	FacultyRepository facultyRepository;
-//	@Autowired
-//	AdminRepository adminRepository;
+
 
 	@Autowired
 	StudentService studentService;
@@ -43,9 +37,9 @@ public class RegistrationApplication implements CommandLineRunner {
 
 	public void addStudent(){
 		StudentDTO tewodroes = new StudentDTO("Tewodroes", "Hailu",
-				"tewodroes.hailu@miu.edu", 615167L);
+				"tewodroes.hailu@miu.edu", 615167L, "teddy", "teddy");
 		StudentDTO gedeon = new StudentDTO("Gedeon", "Tona",
-				"gedeon.tona@miu.edu", 776655L);
+				"gedeon.tona@miu.edu", 776655L, "gedy", "gedy");
 		AddressDTO mAddress = new AddressDTO("1000 N4thSt.", "Fairfield", 52557, "Iowa", "USA");
 		AddressDTO hAddress = new AddressDTO("2000SW St.", "Fairfield", 53567, "Iowa", "USA");
 		tewodroes.setMailAddress(mAddress);

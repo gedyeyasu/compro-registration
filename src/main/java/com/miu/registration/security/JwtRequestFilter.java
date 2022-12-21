@@ -1,4 +1,4 @@
-package com.miu.registration.config;
+package com.miu.registration.security;
 
 import com.miu.registration.service.JwtUserDetailsService;
 import com.miu.registration.utils.JwtTokenUtil;

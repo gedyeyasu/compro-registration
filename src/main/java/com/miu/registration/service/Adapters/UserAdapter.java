@@ -11,11 +11,13 @@ public class UserAdapter {
         User user = new User();
         user.setUsername(userDTO.getUsername());
         user.setPassword(userDTO.getPassword());
+        user.setRole(userDTO.getRole());
         return user;
     }
     public UserDTO getUserDTOFromUser(User user){
         UserDTO userDTO = new UserDTO();
         user.setUsername(userDTO.getUsername());
+        user.setRole((user.getRole()));
         return userDTO;
     }
 }

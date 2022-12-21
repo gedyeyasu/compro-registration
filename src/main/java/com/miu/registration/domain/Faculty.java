@@ -16,7 +16,7 @@ public class Faculty extends Person{
 
     public Faculty(String firstName, String lastName, String email,
                    String userName, String password, Long facultyId, String title) {
-        super(firstName, lastName, email, userName, password);
+        super(firstName, lastName, email, new User(userName,password, Role.FACULTY));
         this.facultyId = facultyId;
         this.title = title;
     }
