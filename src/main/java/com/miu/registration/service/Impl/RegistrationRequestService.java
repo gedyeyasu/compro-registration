@@ -65,19 +65,12 @@ public class RegistrationRequestService implements IRegistrationRequestService {
                 .collect(Collectors.toList());
     }
 
-    public boolean isRegistrationEventOpen(long studentId){
-        LocalDate currentDate = LocalDate.now();
-        RegistrationEvent currentEvent = registrationEventService.latest(studentId);
-        if(currentDate.isAfter(ChronoLocalDate.from(currentEvent.getStartDate().atStartOfDay()).minus(Period.ofDays(1))) &&
-                currentDate.isBefore(ChronoLocalDate.from(currentEvent.getEndDate().atTime(LocalTime.parse("11:59pm")))))
-            return true;
-        else return false;
-    }
+
 
     @Override
     public void createRegistrationRequest(RegistrationRequestResponseDTO registrationRequestResponseDTO) throws Exception {
         long studentId = registrationRequestResponseDTO.getStudentId();
-        if(isRegistrationEventOpen(studentId)) {
+        if(registrationEventService.isRegistrationEventOpen(studentId)) {
             Student student = studentRepository.findByStudentId(studentId);
             if(student==null) {
                 throw new Exception("Student "  + studentId +" is not in the database");
