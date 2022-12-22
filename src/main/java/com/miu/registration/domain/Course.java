@@ -1,7 +1,8 @@
 package com.miu.registration.domain;
 
-import lombok.*;
-import lombok.experimental.FieldNameConstants;
+
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
