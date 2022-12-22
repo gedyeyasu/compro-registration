@@ -22,7 +22,7 @@ public class AcademicBlock {
     private String name;
     private LocalDate startDate;
     private LocalDate endDate;
-    @OneToMany (cascade = {CascadeType.PERSIST,CascadeType.MERGE})
+    @OneToMany (cascade = CascadeType.ALL)
     @JoinColumn(name = "Academic_Block")
     private Collection<CourseOffering> courseOfferings = new ArrayList<>();
     private Semester semester;

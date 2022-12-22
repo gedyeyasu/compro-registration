@@ -25,7 +25,7 @@ public class RegistrationRequestAdapter implements IAdapter<RegistrationRequest,
         registrationRequest.setId(registrationRequestDTO.getId());
         registrationRequest.setPriority(registrationRequestDTO.getPriority());
         registrationRequest.setCourseOffering(courseOfferingAdapter.getDomainFromDTO(registrationRequestDTO.getCourseOfferingDTO()));
-        registrationRequest.setStudent(studentAdapter.getDomainFromDTO(registrationRequestDTO.getStudentDTO()));
+        registrationRequest.setStudent(registrationRequestDTO.getStudent());
 
         return registrationRequest;
     }
@@ -37,7 +37,7 @@ public class RegistrationRequestAdapter implements IAdapter<RegistrationRequest,
         registrationRequestDTO.setId(registrationRequest.getId());
         registrationRequestDTO.setPriority(registrationRequest.getPriority());
         registrationRequestDTO.setCourseOfferingDTO(courseOfferingAdapter.getDTOFromDomain(registrationRequest.getCourseOffering()));
-        registrationRequestDTO.setStudentDTO(studentAdapter.getDTOFromDomain(registrationRequest.getStudent()));
+        registrationRequestDTO.setStudent(registrationRequest.getStudent());
 
         return registrationRequestDTO;
     }

@@ -8,34 +8,25 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 @Entity
-@Getter
-@Setter
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
 public class CourseOffering {
-    public CourseOffering(String code, Integer capacity, Course course, Faculty faculty) {
-        this.code = code;
-        this.capacity = capacity;
-        this.course = course;
-        this.faculty = faculty;
-    }
-
     @Id
     @GeneratedValue
     private Long id;
     private String code;
 
     private Integer capacity=50;
-    @OneToMany(cascade = {CascadeType.PERSIST,CascadeType.MERGE},fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     @JoinColumn
     private Collection<Registration> registrationsOfStudents=new ArrayList<>();
-    @ManyToOne(cascade = {CascadeType.PERSIST,CascadeType.MERGE})
+    @ManyToOne(cascade = CascadeType.ALL)
     private Course course;
 
-    @ManyToOne(cascade = {CascadeType.PERSIST,CascadeType.MERGE})
+    @ManyToOne(cascade = CascadeType.ALL)
     private Faculty faculty;
-    @Transient
+//    @Transient
     private Integer availableSeat;
     public void addRegistrationOfStudents(Collection<Registration> registrationsOfStudents){
         this.registrationsOfStudents.addAll(registrationsOfStudents);
@@ -51,5 +42,12 @@ public class CourseOffering {
 
     public void setAvailableSeat(Integer availableSeat) {
         this.availableSeat = availableSeat;
+    }
+
+    public CourseOffering(String code, int capacity, Course course, Faculty faculty){
+        this.code = code;
+        this.capacity = capacity;
+        this.course = course;
+        this.faculty = faculty;
     }
 }

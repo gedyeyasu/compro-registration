@@ -17,6 +17,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 
 import javax.transaction.Transactional;
 import java.time.LocalDate;
+import java.util.List;
 
 @SpringBootApplication
 @EnableKafka
@@ -95,16 +96,14 @@ public class RegistrationApplication implements CommandLineRunner {
 	aprilBlock.addCourseOffering(courseOffering4);
 
 	RegistrationGroup augustFPPGroup = new RegistrationGroup();
-	augustFPPGroup.addAcademicBlock(januaryBlock);
-	augustFPPGroup.addAcademicBlock(aprilBlock);
-	augustFPPGroup.addStudent(tewodroes);
-	augustFPPGroup.addStudent(gedeon);
+	augustFPPGroup.setAcademicBlocks(List.of(januaryBlock, aprilBlock));
+	augustFPPGroup.setStudents(List.of(tewodroes, gedeon));
 	augustFPPGroup.setGroupEnum(RegistrationGroupEnum.FPP_TRACK);
 
 	RegistrationEvent registrationEvent = new RegistrationEvent();
 	registrationEvent.addRegistrationGroup(augustFPPGroup);
-	registrationEvent.setEndDate(LocalDate.of(2023,05, 05));
-	registrationEvent.setStartDate(LocalDate.of(2023,05, 01));
+	registrationEvent.setEndDate(LocalDate.of(2022,12, 25));
+	registrationEvent.setStartDate(LocalDate.of(2022,12, 21));
 
 	registrationEventRepository.save(registrationEvent);
 

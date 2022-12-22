@@ -12,7 +12,6 @@ import java.util.List;
 
 
 @Entity
-@Component
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -20,26 +19,17 @@ public class RegistrationGroup{
     @Id
     @GeneratedValue
     private Long id;
-    @Enumerated
+    @Enumerated(EnumType.STRING)
     private RegistrationGroupEnum groupEnum;
     @OneToMany(cascade = CascadeType.ALL)
-    private List<Student> students = new ArrayList<>();
-
-//    @ManyToMany
-//    private List<CourseOffering> courseOfferings = new ArrayList<>();
-
+    private List<Student> students;
 
     @JoinColumn(name="academic_block_id")
     @OneToMany(cascade = CascadeType.ALL)
-    private Collection<AcademicBlock> academicBlocks = new ArrayList<>(); ;
+    private Collection<AcademicBlock> academicBlocks; ;
 
-    public void addStudent(Student student){
-        students.add(student);
-    }
 
-    public void addAcademicBlock(AcademicBlock academicBlock){
-        this.academicBlocks.add(academicBlock);
-    }
+
 
 
 }

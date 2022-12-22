@@ -1,6 +1,7 @@
 package com.miu.registration.service.DTO;
 
 
+import com.miu.registration.domain.Student;
 import lombok.*;
 
 @Data
@@ -11,5 +12,5 @@ public class RegistrationRequestDTO {
     private long id;
     private int priority;
     private CourseOfferingDTO courseOfferingDTO;
-    private StudentDTO studentDTO;
+    private Student student;
 }

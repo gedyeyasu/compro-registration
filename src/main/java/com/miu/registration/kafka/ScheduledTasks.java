@@ -25,8 +25,8 @@ public class ScheduledTasks {
 
     //cron task that runs once every day and checks if reminder should be sent
     //run a task every day at 12:00 AM (midnight), "run at the 0th minute of the 0th hour every day".
-    //@Scheduled(cron = "0 0 0 * * *")
-    @Scheduled(cron = "0 */2 * ? * *")
+    @Scheduled(cron = "0 16,20 0 * * *")
+    //@Scheduled(cron = "0 */2 * ? * *")
     public void runTaskBasedOnRegistrationEndDate() {
 //        emailPublisher.publish(topic,new EmailMessage("teddymeselu@gmail.com", "Please Update your Registration since its about to be closed","Course Registration is about to be Expired!"));
 //    }

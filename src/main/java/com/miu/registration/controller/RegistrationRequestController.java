@@ -40,9 +40,9 @@ public class RegistrationRequestController {
     public ResponseEntity<?> saveRequest(@RequestBody RegistrationRequestResponseDTO registrationRequestResponseDTO){
         try{
             requestService.createRegistrationRequest(registrationRequestResponseDTO);
-            return new ResponseEntity<>(HttpStatus.OK);
+            return new ResponseEntity<String>("Registration request Saved Successfully",HttpStatus.OK);
         }catch(Exception e){
-            System.out.println(e.getMessage());
+            e.printStackTrace();
         return new ResponseEntity<String>(e.getMessage(),HttpStatus.NOT_FOUND);
         }
     }

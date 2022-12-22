@@ -68,6 +68,8 @@ public class RegistrationRequestService implements IRegistrationRequestService {
     public void createRegistrationRequest(RegistrationRequestResponseDTO registrationRequestResponseDTO) throws Exception {
         long studentId = registrationRequestResponseDTO.getStudentId();
         RegistrationEvent latestEvent = registrationEventService.latest(studentId);
+        Map<String, Integer> existingRegistrationRequests = registrationRequestRepository.findRegistrationRequestByStudentId(studentId).stream()
+                .collect(Collectors.toMap((registrationRequest -> registrationRequest.getCourseOffering().getCode()), RegistrationRequest::getPriority));
         if(latestEvent.getEventStatus() == EventStatus.OPEN) {
             Student student = studentRepository.findByStudentId(studentId);
             if(student==null) {
@@ -76,7 +78,7 @@ public class RegistrationRequestService implements IRegistrationRequestService {
             List<RegistrationRequest> registrationRequests = new ArrayList<>();
             for(RegistrationRequestDTO registrationRequestDTO: registrationRequestResponseDTO.getRegistrationRequestDTOS()){
 //                set student to each registration request
-                registrationRequestDTO.setStudentDTO(studentAdapter.getDTOFromDomain(student));
+                registrationRequestDTO.setStudent(student);
                 RegistrationRequest request = registrationRequestAdaptor.getDomainFromDTO(registrationRequestDTO);
                 request.setStudent(student);
                 CourseOffering courseOffering = courseOfferingRepository.findCourseOfferingByCode(registrationRequestDTO.getCourseOfferingDTO().getCode());
@@ -84,6 +86,14 @@ public class RegistrationRequestService implements IRegistrationRequestService {
                     throw new Exception("CourseOffering Not found!");
                 }
                 request.setCourseOffering(courseOffering);
+
+                if(existingRegistrationRequests.containsKey(courseOffering.getCode())){
+                    System.out.println("same course");
+                    if(request.getPriority() == existingRegistrationRequests.get(courseOffering.getCode())){
+                        System.out.println("same priority");
+                        throw new Exception("Duplicate Course Offering Request!");
+                    }
+                }
                 registrationRequests.add(request);
 
             }

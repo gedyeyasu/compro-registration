@@ -28,7 +28,7 @@ public class RegistrationEvent {
     @DateTimeFormat(style = "yyyy-MM-dd")
     private LocalDate endDate ;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     //@JoinColumn(name="Registration Event_Id")
     private List<RegistrationGroup> registrationGroups = new ArrayList<RegistrationGroup>();
 
@@ -38,8 +38,8 @@ public class RegistrationEvent {
 
     public EventStatus getEventStatus() {
         LocalDate currentDate = LocalDate.now();
-        if (currentDate.isAfter(ChronoLocalDate.from(this.getStartDate().atStartOfDay()).minus(Period.ofDays(1))) &&
-                currentDate.isBefore(ChronoLocalDate.from(this.getEndDate().atTime(LocalTime.parse("11:59pm")))))
+
+        if (currentDate.isAfter(this.startDate)&&currentDate.isBefore(this.endDate))
             return EventStatus.OPEN;
         else
             return EventStatus.CLOSED;
