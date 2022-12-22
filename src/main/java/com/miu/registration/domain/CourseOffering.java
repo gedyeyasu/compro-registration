@@ -14,6 +14,13 @@ import java.util.Collection;
 @NoArgsConstructor
 @ToString
 public class CourseOffering {
+    public CourseOffering(String code, Integer capacity, Course course, Faculty faculty) {
+        this.code = code;
+        this.capacity = capacity;
+        this.course = course;
+        this.faculty = faculty;
+    }
+
     @Id
     @GeneratedValue
     private Long id;

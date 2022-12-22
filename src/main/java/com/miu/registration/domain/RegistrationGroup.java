@@ -22,7 +22,7 @@ public class RegistrationGroup{
     private Long id;
     @Enumerated
     private RegistrationGroupEnum groupEnum;
-    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL)
     private List<Student> students = new ArrayList<>();
 
 //    @ManyToMany
@@ -31,10 +31,14 @@ public class RegistrationGroup{
 
     @JoinColumn(name="academic_block_id")
     @OneToMany(cascade = CascadeType.ALL)
-    private Collection<AcademicBlock> academicBlocks ;
+    private Collection<AcademicBlock> academicBlocks = new ArrayList<>(); ;
 
     public void addStudent(Student student){
         students.add(student);
+    }
+
+    public void addAcademicBlock(AcademicBlock academicBlock){
+        this.academicBlocks.add(academicBlock);
     }
 
 

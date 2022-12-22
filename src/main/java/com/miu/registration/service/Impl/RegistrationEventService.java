@@ -1,15 +1,14 @@
 package com.miu.registration.service.Impl;
 
 
-import com.miu.registration.domain.EventStatus;
-import com.miu.registration.domain.RegistrationGroup;
-import com.miu.registration.domain.Student;
+import com.miu.registration.domain.*;
 import com.miu.registration.repositories.RegistrationEventRepository;
+import com.miu.registration.repositories.RegistrationRequestRepository;
 import com.miu.registration.service.Adapters.RegistrationEventAdapter;
 import com.miu.registration.service.DTO.RegistrationEventDTO;
-import com.miu.registration.domain.RegistrationEvent;
 import com.miu.registration.service.DTO.RegistrationEventResponseDTO;
 import com.miu.registration.service.IRegistrationEventService;
+import org.apache.kafka.connect.errors.NotFoundException;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,8 +17,9 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.Period;
 import java.time.chrono.ChronoLocalDate;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 @Service
 public class RegistrationEventService implements IRegistrationEventService {
@@ -28,6 +28,9 @@ public class RegistrationEventService implements IRegistrationEventService {
     private RegistrationEventRepository registrationEventRepository;
     @Autowired
     private RegistrationEventAdapter registrationEventAdapter;
+
+    @Autowired
+    private RegistrationRequestRepository registrationRequestRepository;
 
     @Override
     public List<RegistrationEvent> getAllRegistrationEvent() {
@@ -69,5 +72,49 @@ public class RegistrationEventService implements IRegistrationEventService {
         RegistrationEvent latestRegistrationEvent = latest(studentId);
         RegistrationEventDTO latestRegistrationEventDTO = registrationEventAdapter.getDTOFromDomain(latestRegistrationEvent);
         return new RegistrationEventResponseDTO(latestRegistrationEvent.getEventStatus(), latestRegistrationEventDTO);
+    }
+
+    public void processRegistrationEvent(long id) throws Exception{
+        Optional<RegistrationEvent> registrationEvent = registrationEventRepository.findById(id);
+        if(registrationEvent.isPresent()){
+            for(RegistrationGroup registrationGroup: registrationEvent.get().getRegistrationGroups()){
+                List<Student> shuffledStudents = registrationGroup.getStudents();
+                Collections.shuffle(shuffledStudents);
+                for(Student student: shuffledStudents) {
+//                    Map<CourseOffering,Integer> registrationRequestsMap = registrationRequestRepository.findRegistrationRequestByStudentId(student.getStudentId()).stream().collect(Collectors.toMap(RegistrationRequest::getCourseOffering,RegistrationRequest::getPriority));
+                    Map<AcademicBlock, PriorityQueue<CourseOffering>> blockCourseOfferingMap = new HashMap<>();
+                    for(AcademicBlock academicBlock: registrationGroup.getAcademicBlocks()){
+//                        registrationRequestsMap = registrationRequestRepository.findRegistrationRequestByStudentIdAndCourseOfferingOrderByPriority(student.getStudentId()).stream().collect(Collectors.toMap(RegistrationRequest::getCourseOffering,RegistrationRequest::getPriority));
+                        for(CourseOffering courseOffering: academicBlock.getCourseOfferings()){
+                            PriorityQueue<RegistrationRequest> requestPriorityQueue = registrationRequestRepository.findRegistrationRequestByStudentIdAndCourseOfferingOrderByPriority(student.getStudentId(), courseOffering);
+                        }
+                        Map<Integer, CourseOffering>  courseChoiceMap = new HashMap<>();
+                        Map<String, RegistrationRequest> registrationRequestMap = new HashMap<>();
+//                        student will send registration request for all available courses in a block
+
+                        academicBlock.getCourseOfferings();
+
+                    }
+                    List<RegistrationRequest> registrationRequests = registrationRequestRepository.findRegistrationRequestByStudentId(student.getStudentId());
+                }
+                for(AcademicBlock academicBlock: registrationGroup.getAcademicBlocks()){
+                    for(CourseOffering courseOffering: academicBlock.getCourseOfferings()){
+
+                    }
+                }
+                for(Student student: shuffledStudents){
+                    List<RegistrationRequest> registrationRequests = registrationRequestRepository.findRegistrationRequestByStudentId(student.getStudentId());
+                    for(RegistrationRequest registrationRequest: registrationRequests){
+//                        validate registration request is for valid course offering
+//                        boolean isValid = registrationGroup.getAcademicBlocks().stream().flatMap(academicBlock -> academicBlock.getCourseOfferings().stream()).anyMatch((courseOffering -> courseOffering.getCode().equals(registrationRequest.getCourseOffering().getCode())));
+
+                        // check if request has availble seat
+                        registrationRequest.getCourseOffering().getAvailableSeat();
+                    }
+                }
+            }
+
+        }else
+        throw new NotFoundException("Registration Event with Id "+id+" not found!");
     }
 }

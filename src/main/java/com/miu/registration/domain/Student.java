@@ -21,7 +21,7 @@ public class Student extends Person{
     private Address homeAddress;
 
     public Student(String firstName, String lastName, String email,
-                   String userName, String password, Long studentId) {
+                   Long studentId, String password, String userName) {
         super(firstName, lastName, email, new User(userName,password, Role.STUDENT));
         this.studentId = studentId;
     }

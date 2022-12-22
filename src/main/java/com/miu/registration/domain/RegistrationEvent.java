@@ -32,6 +32,10 @@ public class RegistrationEvent {
     //@JoinColumn(name="Registration Event_Id")
     private List<RegistrationGroup> registrationGroups = new ArrayList<RegistrationGroup>();
 
+    public void addRegistrationGroup(RegistrationGroup registrationGroup){
+        this.registrationGroups.add(registrationGroup);
+    }
+
     public EventStatus getEventStatus() {
         LocalDate currentDate = LocalDate.now();
         if (currentDate.isAfter(ChronoLocalDate.from(this.getStartDate().atStartOfDay()).minus(Period.ofDays(1))) &&

@@ -5,6 +5,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Collection;
 
 
@@ -23,9 +24,18 @@ public class AcademicBlock {
     private LocalDate endDate;
     @OneToMany (cascade = {CascadeType.PERSIST,CascadeType.MERGE})
     @JoinColumn(name = "Academic_Block")
-    private Collection<CourseOffering> courseOfferings;
+    private Collection<CourseOffering> courseOfferings = new ArrayList<>();
+    private Semester semester;
 
-    public void addCourseOfferings(Collection<CourseOffering> courseOfferings){
-        this.courseOfferings.addAll(courseOfferings);
+    public AcademicBlock(String code, String name, LocalDate startDate, LocalDate endDate, Semester semester) {
+        this.code = code;
+        this.name = name;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.semester = semester;
+    }
+
+    public void addCourseOffering(CourseOffering courseOffering){
+        this.courseOfferings.add(courseOffering);
     }
 }

@@ -6,11 +6,11 @@ import org.springframework.stereotype.Component;
 
 
 @Component
-public class EmailSender {
+public class EmailPublisher {
     @Autowired
     private KafkaTemplate<String, EmailMessage> kafkaTemplate;
 
-    public void send(String topic, EmailMessage emailMessage){
+    public void publish(String topic, EmailMessage emailMessage){
         System.out.println("sending message "+ emailMessage);
         kafkaTemplate.send(topic, emailMessage);
     }

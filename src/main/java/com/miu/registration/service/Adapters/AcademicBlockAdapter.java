@@ -26,7 +26,7 @@ public class AcademicBlockAdapter implements IAdapter<AcademicBlock, AcademicBlo
         //error
         Collection<CourseOffering> courseOfferings = academicBlockDTO.getCourseOfferings().stream().
                 map(courseOfferingAdapter::getDomainFromDTO).collect(Collectors.toList());
-        academicBlock.addCourseOfferings(courseOfferings);
+        academicBlock.setCourseOfferings(courseOfferings);
 
         return academicBlock;
     }
