@@ -8,6 +8,10 @@ import com.miu.registration.repositories.UserRepository;
 import com.miu.registration.service.Adapters.UserAdapter;
 import com.miu.registration.service.DTO.UserDTO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.DisabledException;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
@@ -24,6 +28,9 @@ public class JwtUserDetailsService implements UserDetailsService {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private AuthenticationManager authenticationManager;
 
     @Autowired
     private PasswordEncoder bcryptEncoder;
@@ -60,6 +67,15 @@ public class JwtUserDetailsService implements UserDetailsService {
         User user = (User)authentication.getPrincipal();
         com.miu.registration.domain.User domainUser = userRepository.findByUsername(user.getUsername());
         return domainUser;
+    }
+    public void authenticate(String username, String password) throws Exception {
+        try {
+            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
+        } catch (DisabledException e) {
+            throw new Exception("USER_DISABLED", e);
+        } catch (BadCredentialsException e) {
+            throw new Exception("INVALID_CREDENTIALS", e);
+        }
     }
     public Person getRequestDomain(){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
